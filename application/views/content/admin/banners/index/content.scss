@@ -1,0 +1,75 @@
+/**
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2016 OA Wu Design
+ */
+
+@import "_oa";
+
+.article {
+  margin-top: 10px;
+  > form {
+    p {
+      display: inline-block;
+      width: 100%;
+      background-color: rgba(249, 250, 251, 1.00);
+      @include border-radius(3px);
+      padding: 5px 10px;
+    }
+  }
+  
+}
+form {
+  position: relative;
+
+  input {
+    margin-top: 20px;
+    @include input;
+    width: 100%;
+  }
+}
+form> div {
+  text-align: right;
+  margin-top: 10px;
+
+  >button {
+
+    cursor: pointer;
+    padding: 0 10px;
+    line-height: 25px - 2px;
+    height: 25px;
+    font-size: 13px;
+    margin-left: 5px;
+    @include border-radius(25px / 2);
+    text-decoration: none;
+    background-color: white;
+
+    display: inline-block;
+    border: 1px solid rgba(131, 195, 225, 1.00);
+    color: rgba(131, 195, 225, 1.00);
+    @include transition(color .3s, background-color .3s);
+    &:hover {
+      color: white;
+      background-color: rgba(131, 195, 225, 1.00);
+    }
+  }
+}
+.n2 {
+  img {
+    display: inline-block;
+    width: 100%;
+  }
+}
+#msg {
+  @include alert('danger', false);
+  display: inline-block;
+  width: 100%;
+  margin-top: 20px;
+  text-align: left;
+}
+#msg_i {
+  @include alert('info', false);
+  display: inline-block;
+  width: 100%;
+  margin-top: 20px;
+  text-align: left;
+}

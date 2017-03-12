@@ -1,0 +1,197 @@
+/**
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2016 OA Wu Design
+ */
+
+@import "_oa";
+
+#fm {
+  padding-top: 10px;
+  select {
+    @include input;
+    height: 30px;
+    line-height: 30px;
+  }
+  button {
+    background-color: rgba(210, 211, 212, 1.00);
+    color: white;
+    border: 0;
+    width: 35px;
+    height: 30px;
+    @include border-radius(3px);
+  }
+}
+#info {
+
+  >div {
+    padding-top: 20px !important;
+    > div {
+      height: 45px;
+    }
+  }
+}
+.info {
+  >div>div {
+    height: 45px;
+  }
+  a {
+    margin-top: 10px !important;
+  }
+}
+.tr {
+  > div {
+    height: 150px !important;
+  }
+  > div:last-child {
+    > div {
+      color: rgba(167, 168, 169, 1.00);
+      b {
+        color: rgba(77, 79, 80, 1.00);
+      }
+      &:last-child {
+        span {
+          margin-top: 10px;
+          display: inline-block;
+          width: 100%;
+          line-height: 30px;
+          word-break: break-all;
+          height: 60px;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+  > div:first-child {
+
+    time {
+      font-size: 12px;
+      color: rgba(161, 162, 163, 1.00);
+    }
+    h3 {
+      font-size: 15px;
+      margin: 0;
+      color: rgba(77, 79, 80, 1.00);
+      height: 50px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    > div {
+      @include clearfix();
+      > a {
+        float: left;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 13px;
+        + a {
+          margin-left: 5px;
+        }
+
+        color: rgba(131, 195, 225, 1.00);
+        border: 1px solid rgba(131, 195, 225, 1.00);
+        padding: 0 5px;
+        height: 25px;
+        min-width: 25px;
+        text-align: center;
+        line-height: 25px - 2px;
+        cursor: pointer;
+        @include border-radius(25px / 2);
+        @include transition(background-color .3s, color .3s);
+        
+        &.a, &:hover {
+          color: white;
+          background-color: rgba(131, 195, 225, 1.00);
+        }
+      }
+    }
+  }
+  
+}
+.pagination {
+  text-align: center;
+  &:not(:empty) {
+    + * {
+      > * {
+        border-top: 0 !important;
+        margin-top: 0 !important;
+        padding-top: 5px !important;
+      }
+    }
+  }
+  &:empty {
+    display: none;
+  }
+  ul {
+    display: inline-block;
+    max-width: 1020px;
+    width: calc(100% - 10px * 2);
+    margin: 0 10px;
+    border-top: 1px solid rgba(233, 234, 235, 1.00);
+
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+    @include clearfix();
+    
+    li {
+      float: left;
+      display: inline-block;
+      padding: 0;
+      +li {
+        margin-left: 5px;
+      }
+      text-align: center;
+
+      &.active {
+        a {
+          color: white;
+          background-color: rgba(157, 141, 116, 1.00);
+        }
+      }
+      a {
+        display: inline-block;
+        min-width: 30px;
+        height: 30px;
+        line-height: 30px - 2px;
+        color: rgba(157, 141, 116, 1.00);
+        cursor: pointer;
+        font-size: 13px;
+        padding: 0 8px;
+        text-decoration: none;
+        border: 1px solid rgba(157, 141, 116, 1.00);
+        @include border-radius(30px / 2);
+        @include transition(background-color .3s, color .3s);
+
+        &:hover {
+          color: white;
+          background-color: rgba(157, 141, 116, 1.00);
+        }
+      }
+    }
+  }        
+}
+#msg {
+  display: inline-block;
+  max-width: 1020px;
+  width: calc(100% - 10px * 2);
+  margin: 0 10px;
+  div {
+    @include alert('danger', false);
+    display: inline-block;
+    width: 100%;
+    margin-top: 20px;
+    text-align: left;
+  }
+}
+#msg_i {
+  display: inline-block;
+  max-width: 1020px;
+  width: calc(100% - 10px * 2);
+  margin: 0 10px;
+  div {
+    @include alert('info', false);
+    display: inline-block;
+    width: 100%;
+    margin-top: 20px;
+    text-align: left;
+  }
+}

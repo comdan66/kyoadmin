@@ -4,3 +4,45 @@
  */
 
 @import "_oa";
+
+.article {
+  margin-top: 10px;
+  > form {
+    p {
+      display: inline-block;
+      width: 100%;
+      background-color: rgba(249, 250, 251, 1.00);
+      @include border-radius(3px);
+      padding: 5px 10px;
+    }
+  }
+  >form> div {
+    text-align: right;
+    margin-top: 10px;
+    >button,>a {
+
+      cursor: pointer;
+      padding: 0 10px;
+      line-height: 25px - 2px;
+      height: 25px;
+      font-size: 13px;
+      margin-left: 5px;
+      @include border-radius(25px / 2);
+      text-decoration: none;
+      background-color: white;
+
+      display: inline-block;
+      border: 1px solid rgba(131, 195, 225, 1.00);
+      color: rgba(131, 195, 225, 1.00);
+      @include transition(color .3s, background-color .3s);
+      &:hover {
+        color: white;
+        background-color: rgba(131, 195, 225, 1.00);
+      }
+    }
+  }
+}
+
+.xs {
+  line-height: 20px !important;
+}

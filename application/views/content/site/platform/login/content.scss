@@ -1,0 +1,168 @@
+/**
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2016 OA Wu Design
+ */
+
+@import "_oa";
+
+
+@include font-face("admin", font-files("admin/icomoon.eot", "admin/icomoon.woff", "admin/icomoon.ttf", "admin/icomoon.svg"));
+[class^="admin-"], [class*=" admin-"] {
+  font-family: 'admin', 'Open sans', Comfortaa, 'Helvetica Neue', Helvetica, Arial, 'Hiragino Maru Gothic ProN', 'メイリオ','ヒラギノ丸ゴ ProN W4', '微軟正黑體', Meiryo, 'Droid Sans';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  @include font-smoothing(antialiased);
+}
+
+
+.admin-ribbon:before {
+  content: "\e009";
+}
+.admin-user:before {
+  content: "\e074";
+}
+.admin-file:before {
+  content: "\e124";
+}
+.admin-image:before {
+  content: "\e902";
+}
+.admin-lock:before {
+  content: "\e901";
+}
+
+
+
+
+html {
+  height: 100%;
+
+  body {
+    background-color: rgba(255, 255, 255, 1.00);
+
+    font-family: 'Open sans', Comfortaa, 'Helvetica Neue', Helvetica, Arial, 'Hiragino Maru Gothic ProN', 'メイリオ','ヒラギノ丸ゴ ProN W4', '微軟正黑體', Meiryo, 'Droid Sans';
+    height: auto;
+    color: rgba(85, 85, 85, 1);
+
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-size: medium;
+    font-weight: normal;
+    background-color: rgba(254, 255, 255, 1.00);
+
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-top: 3px solid rgba(70, 76, 91, 1.00);
+  }
+}
+
+#login {
+  display: inline-block;
+  width: 400px;
+  margin: 0 auto;
+  text-align: left;
+  // background-color: rgba(0, 0, 255, 0.2);
+  @include border-radius(3px);
+  
+  position: absolute;
+  top: 20%;
+  left: calc(50% - 350px / 2);
+  img {
+    display: inline-block;
+    width: 338px;
+  }
+  .e {
+    @include alert('danger', false);
+    margin: 0 auto;
+    margin-top: 25px;
+    @include border-radius(2px);
+    font-size: 13px;
+    width: calc(100% - 10px * 2);
+    &:empty {
+      display: none;
+    }
+  }
+  .row {
+    display: inline-block;
+    width: 100%;
+    height: 35px + 2px;
+    background-color: rgba(255, 255, 255, 1.00);
+    margin-top: 10px;
+    @include border-radius(3px);
+    border: 1px solid rgba(235, 236, 237, 1.00);
+    @include clearfix();
+
+    label {
+      float: left;
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+      text-align: center;
+      color: rgba(226, 227, 228, 1.00);
+
+    }
+
+    input {
+      @include input;
+      width: calc(100% - 35px);
+      height: 35px;
+      line-height: 35px;
+      font-size: 13px;
+      border: 0;
+      @include border-radius(0);
+
+      &:focus {
+        outline: 0;
+        border: 0;
+        @include box-shadow(none);
+      }
+    }
+  }
+  .bottom {
+    @include clearfix();
+    height: 35px;
+    margin-top: 25px;
+    span {
+      float: left;
+      display: inline-block;
+      color: rgba(198, 199, 200, 1.00);
+      font-size: 13px;
+      width: calc(100% - 100px);
+      height: 100%;
+      line-height: 35px;
+    }
+    a {
+      @include a;
+    }
+    button {
+      float: left;
+      width: 100px;
+      height: 100%;
+    }
+  }
+  button[type='submit'] {
+    @include button('kyo', false);
+    
+    font-size: medium;
+    color: rgba(255, 255, 255, .9);
+  }
+  form {
+    display: inline-block;
+    width: 100%;
+    padding: 0 10px;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    // border-top: 1px solid rgba(218, 224, 229, 1.00);
+    // border-bottom: 1px solid rgba(218, 224, 229, 1.00);
+  }
+}

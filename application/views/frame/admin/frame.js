@@ -4,4 +4,18 @@
  */
 
 $(function () {
+  window.vars = {
+    apis: {
+      ckeditor: {
+        apis: {
+          images: {
+            upload: '/admin/ckeditor/image_upload/',
+            browser: '/admin/ckeditor/image_browser/',
+          }
+        },
+        postImage: function () { return this.apis.images.upload ; },
+        getImages: function () { return this.apis.images.browser ; },
+      }
+    }
+  };
 });

@@ -45,6 +45,13 @@ Route::root ('main');
 // $route['admin'] = "admin/main";
 Route::get ('admin', 'admin/main@index');
 
+Route::get ('/login', 'platform@login');
+Route::get ('/logout', 'platform@logout');
+Route::get ('/platform/index', 'platform@login');
+Route::get ('/platform', 'platform@login');
+Route::group ('admin', function () {
+  Route::resourcePagination (array ('articles'), 'articles');
+});
 // $route['main/index/(:num)/(:num)'] = "main/aaa/$1/$2";
 // Route::get ('main/index/(:num)/(:num)', 'main@aaa($1, $2)');
 // Route::post ('main/index/(:num)/(:num)', 'main@aaa($1, $2)');

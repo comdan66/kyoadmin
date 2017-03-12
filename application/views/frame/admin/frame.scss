@@ -5,8 +5,349 @@
 
 @import "_oa";
 
-html {
-  body {
+@include font-face("admin", font-files("admin/icomoon.eot", "admin/icomoon.woff", "admin/icomoon.ttf", "admin/icomoon.svg"));
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'admin', 'Open sans', Comfortaa, 'Helvetica Neue', Helvetica, Arial, 'Hiragino Maru Gothic ProN', 'メイリオ','ヒラギノ丸ゴ ProN W4', '微軟正黑體', Meiryo, 'Droid Sans';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
+  @include font-smoothing(antialiased);
+}
+
+
+.icon-ribbon:before {
+  content: "\e009";
+}
+.icon-user:before {
+  content: "\e074";
+}
+.icon-file:before {
+  content: "\e124";
+}
+.icon-log-out:before {
+  content: "\e900";
+}
+.icon-lock:before {
+  content: "\e901";
+}
+.icon-image:before {
+  content: "\e902";
+}
+.icon-login:before {
+  content: "\e903";
+}
+.icon-search:before {
+  content: "\e986";
+}
+
+
+
+html {
+  height: 100%;
+
+  body {
+    background-color: rgba(255, 255, 255, 1.00);
+
+    font-family: 'Open sans', Comfortaa, 'Helvetica Neue', Helvetica, Arial, 'Hiragino Maru Gothic ProN', 'メイリオ','ヒラギノ丸ゴ ProN W4', '微軟正黑體', Meiryo, 'Droid Sans';
+    height: auto;
+    color: rgba(85, 85, 85, 1);
+
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-size: medium;
+    font-weight: normal;
+    background-color: rgba(254, 255, 255, 1.00);
+
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-top: 3px solid rgba(70, 76, 91, 1.00);
+  }
+}
+
+#header, #footer, #menu, #info, .table, .info {
+  > div {
+    display: inline-block;
+    max-width: 1000px + 10px * 2;
+    width: calc(100% - 10px * 2);
+    margin: 0 10px;
+  }
+}
+#header {
+  padding: 30px 0;
+  > div {
+    @include clearfix();
+    
+
+    img {
+      display: inline-block;
+      width: 338px;
+      float: left;
+    }
+    a {
+      float: right;
+      margin-top: 15px;
+      color: rgba(188, 189, 192, 1.00);
+      border: 1px solid rgba(188, 189, 192, 1.00);
+      @include border-radius(27px / 2);
+      height: 27px;
+      line-height: 27px;
+      width: 70px;
+      text-decoration: none;
+      font-size: 14px;
+      @include transition(background-color .3s, color .3s);
+      
+      &:hover {
+        background-color: rgba(188, 189, 192, 1.00);
+        color: white;
+      }
+    }
+  }
+}
+
+#menu {
+  background-color: rgba(249, 250, 251, 1.00);
+  border-top: 1px solid rgba(240, 241, 242, 1.00);
+  border-bottom: 1px solid rgba(240, 241, 242, 1.00);
+  > div {
+    margin: 0 10px;
+    @include clearfix();
+
+    a {
+      display: inline-block;
+      width: calc(100% / 4);
+      height: 45px;
+      line-height: 45px - 2px;
+      float: left;
+      color: rgba(143, 144, 145, 1.00);
+      text-decoration: none;
+      @include transition(background-color .3s);
+
+      &:after {
+        content: attr(title);
+        margin-left: 10px;
+      }
+      
+      &.a, &:hover {
+        background-color: rgba(231, 232, 233, 1.00);
+      }
+    }
+  }
+}
+
+#info, .info {
+  > div {
+    padding: 20px 0;
+    padding-top: 10px;
+    border-bottom: 1px solid rgba(233, 234, 235, 1.00);
+    text-align: left;
+    @include clearfix();
+
+    > div {
+      float: left;
+      display: inline-block;
+      width: 50%;
+      height: 75px;
+      @include clearfix();
+      &:last-child {
+        text-align: right;
+        @include clearfix();
+        
+
+        span {
+          float: right;
+          display: inline-block;
+          color: rgba(126, 133, 161, 1.00);
+          line-height: 75px;
+        }
+        .su, a {
+          float: right;
+          margin-top: 30px;
+          padding: 0 10px;
+          line-height: 35px - 2px;
+          height: 35px;
+          cursor: pointer;
+          @include border-radius(35px / 2);
+          text-decoration: none;
+
+          display: inline-block;
+          border: 1px solid rgba(131, 195, 225, 1.00);
+          color: rgba(131, 195, 225, 1.00);
+          @include transition(color .3s, background-color .3s);
+          background-color: white;
+          font-size: 16px;
+
+          &:focus {
+            outline: 0;
+          }
+
+          &.a, &:hover {
+            color: white;
+            background-color: rgba(131, 195, 225, 1.00);
+          }
+        }
+      }
+      &:first-child {
+
+        h1 {
+          display: inline-block;
+          width: 100%;
+          float: left;
+          font-size: 18px;
+          color: rgba(57, 58, 59, 1.00);
+        }
+        span {
+          display: inline-block;
+          width: 100%;
+          float: left;
+          font-size: 14px;
+          color: rgba(163, 164, 165, 1.00);
+          b {
+            color: rgba(57, 58, 59, 1.00);
+            font-weight: normal;
+          }
+        }
+      }
+
+    }
+  }
+}
+
+.table {
+  display: inline-block;
+  width: 100%;
+  > div {
+    
+    .tr {
+      display: inline-block;
+      width: 100%;
+      @include clearfix();
+      + .tr {
+        border-top: 1px solid rgba(243, 244, 245, 1.00);
+      }
+
+      > div {
+        display: inline-block;
+        float: left;
+        text-align: left;
+        height: 100%;
+        // border: 1px solid rgba(255, 0, 0, .3);
+        padding-top: 20px;
+        &:first-child {
+          padding-left: 10px;
+          width: 250px;
+          color: rgba(108, 90, 60, 1.00);
+          border-right: 1px solid rgba(243, 244, 245, 1.00);
+          position: relative;
+
+
+          &:after, &:before {
+            left: 100%;
+            top: 25px;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+          }
+
+          &:after {
+            border-color: transparent;
+            border-left-color: rgba(254, 255, 255, 1.00);
+            border-width: 10px;
+            margin-top: -10px;
+          }
+          &:before {
+            border-color: transparent;
+            border-left-color: rgba(233, 234, 235, 1.00);
+            border-width: (10px + 1px);
+            margin-top: -(10px + 1px);
+          }
+        }
+        &:last-child {
+          width: calc(100% - 250px);
+          padding-left: 20px;
+          > div {
+            display: inline-block;
+            width: 100%;
+            &.e {
+              span {
+                display: none;
+              }
+              > a {
+                display: none;
+              }
+              > form {
+                display: inline-block;
+              }
+            }
+
+            + div {
+              padding-top: 20px;
+            }
+            > form {
+              display: none;
+            }
+            > span {
+            }
+            > form input {
+              @include input;
+            }
+            > form button, > a, > form a {
+              cursor: pointer;
+              padding: 0 10px;
+              line-height: 25px - 2px;
+              height: 25px;
+              font-size: 13px;
+              margin-left: 5px;
+              @include border-radius(25px / 2);
+              text-decoration: none;
+              background-color: white;
+
+              display: inline-block;
+              border: 1px solid rgba(131, 195, 225, 1.00);
+              color: rgba(131, 195, 225, 1.00);
+              @include transition(color .3s, background-color .3s);
+              &:hover {
+                color: white;
+                background-color: rgba(131, 195, 225, 1.00);
+              }
+            }
+          }
+        }
+      }
+
+      &.n1 {
+        > div {
+          height: 100px;
+        }
+      }
+      &.n2 {
+        > div {
+          height: 680px;
+        }
+      }
+    }
+  }
+}
+#footer {
+  div {
+    text-align: right;
+    border-top: 1px solid rgba(233, 234, 235, 1.00);
+    padding: 25px 0;
+    color: rgba(185, 186, 187, 1.00);
+      font-size: 13px;
+    a {
+      display: inline-block;
+      color: rgba(131, 195, 225, 1.00);
+      text-decoration: none;
+    }
   }
 }
