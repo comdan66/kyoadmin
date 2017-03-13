@@ -12,7 +12,7 @@ class Platform extends Site_controller {
   }
   public function login () {
     if (User::current ()) return redirect_message (array ('admin'), array ());
-    else $this->load_view ();
+    else $this->set_frame_path ('frame', 'pure')->load_view ();
   }
   public function ap_sign_in () {
     $posts = OAInput::post ();

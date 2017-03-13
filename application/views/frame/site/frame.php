@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="tw">
   <head>
     <?php echo isset ($meta_list) ? $meta_list : ''; ?>
 
@@ -11,8 +11,101 @@
 
   </head>
   <body lang="zh-tw">
-    <?php echo isset ($hidden_list) ? $hidden_list : ''; ?>
+    
+    <div id='banner'>
+      <div class='_i'><img src='<?php echo base_url ('resource', 'image', 'site', 'skip.jpg');?>'></div>
+      <form id='banner_search' method='get' action='search.html'>
+        <input type='text' name='q' id='q' value='' onkeyup="this.setAttribute('value', this.value);"/>
+        <button type='submit' class='icon-search'></button>
+        <label class='icon-search' for='q'></label>
+      </form>
+      <a id='banner_down' class='icon-chevron-thin-down'></a>
+    </div>
 
+    <div id='top_bar'></div>
+
+    <header id='header'>
+      <div class='container'>
+        <img src="<?php echo base_url ('resource', 'image', 'site', 'TopLogo.png');?>">
+        <section>
+          <header><a href='index.html' class='dftm9'><?php echo Info::info ()->site_title;?></a></header>
+          <p><?php echo Info::info ()->site_desc;?></p>
+        </section>
+        
+        <form id='header_search' method='get' action='search.html'>
+          <input type='text' name='q' id='q2' value='' onkeyup="this.setAttribute('value', this.value);"/>
+          <button type='submit' class='icon-search'></button>
+          <label class='icon-search' for='q2'></label>
+        </form>
+      </div>
+    </header>
+
+    <div id='mobile_btn'>
+      <div class='container'>
+
+        <form id='mobile_search' method='get' action='search.html'>
+          <input type='text' name='q' id='q3' value='' onkeyup="this.setAttribute('value', this.value);"/>
+          <button type='submit' class='icon-search'></button>
+          <label class='icon-search' for='q3'></label>
+        </form>
+        <a class='icon-menu' id='menu_btn'></a>
+      </div>
+    </div>
+
+    <div id='menu'>
+      <div class='container'>
+
+<?php if ($menus = Menu::all (array ('include' => array ('subs'), 'conditions' => array ('menu_id = 0 AND link = ?', '')))) { ?>
+  <?php foreach ($menus as $menu) { ?>
+          <div><a<?php echo $menu->link ? " href='" . $menu->link . "'" : '';?>><?php echo $menu->title;?></a>
+
+      <?php if ($menu->subs) { ?>
+              <div>
+          <?php foreach ($menu->subs as $sub) { ?>
+                  <a<?php echo $sub->link ? " href='" . $sub->link . "'" : '';?>><?php echo $sub->title;?></a>
+          <?php } ?>
+              </div>
+      <?php } ?>
+          </div>
+  <?php } ?>
+<?php } ?>
+
+
+        <span class='count'>
+          <span>本日人氣：<?php echo ($dpv = PV::find ('one', array ('select' => 'count', 'conditions' => array ('day = ?', date ('Y-m-d'))))) ? $dpv->count : 0;?></span>
+          <span>累積人氣：<?php echo ($apv = PV::find ('one', array ('select' => 'SUM(count) as sum', 'conditions' => array ()))) ? $apv->sum : 0;?></span>
+        </span>
+      </div>
+    </div>
+    <div id='cover'></div>
+
+    <div id='tags'>
+      <div class='container'>
+        <a class='icon-keyboard_arrow_left dis'></a>
+        <div>
+    <?php foreach (Tag::all () as $tag) { ?>
+            <a href='<?php echo base_url ('search', $tag->name);?>'><?php echo $tag->name;?></a>
+    <?php } ?>
+        </div>
+        <a class='icon-keyboard_arrow_right'></a>
+      </div>
+    </div>
     <?php echo isset ($content) ? $content : ''; ?>
+
+    
+    <div id='bottom_logo'>
+      <div class='container'>
+        <img src='<?php echo base_url ('resource', 'image', 'site', 'FooterLogo.png');?>'>
+      </div>
+    </div>
+
+    <footer id='footer'>
+      <div class='container'>
+        <div><span>本日人氣：<?php echo ($dpv = PV::find ('one', array ('select' => 'count', 'conditions' => array ('day = ?', date ('Y-m-d'))))) ? $dpv->count : 0;?></span><span>│</span><span>累積人氣：<?php echo ($apv = PV::find ('one', array ('select' => 'SUM(count) as sum', 'conditions' => array ()))) ? $apv->sum : 0;?></span></div>
+      </div>
+    </footer>
+
+    <a id='top' class='icon-keyboard_arrow_up'></a>
+
   </body>
 </html>

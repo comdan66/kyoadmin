@@ -1,1 +1,3 @@
-Hi! I'm OACI.
+<div id='articles'>
+  <div class='container' data-next_id='0' data-url='<?php echo base_url ('api/main');?>'></div>
+</div>

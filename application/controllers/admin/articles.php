@@ -47,6 +47,18 @@ class Articles extends Admin_controller {
     if (!Article::transaction (function () use (&$obj, $posts, $cover) { return verifyCreateOrm ($obj = Article::create (array_intersect_key ($posts, Article::table ()->columns))) && $obj->cover->put ($cover); }))
       return redirect_message (array ('admin', 'articles', 'add'), array ('_flash_danger' => '新增失敗！', 'posts' => $posts));
     
+    $posts['tags'] = $posts['tags'] ? array_filter (array_map (function ($t) { return trim ($t); }, preg_split ('/[\s,]+/', $posts['tags']))) : array ();
+
+    $tags = array_map (function ($tag) {
+      return ($a = Tag::find_by_name ($tag)) ? $a : Tag::create (array (
+          'name' => $tag
+        ));
+    }, $posts['tags']);
+
+    if ($tags)
+      foreach ($tags as $tag)
+        Mapping::transaction (function () use ($tag, $obj) { return verifyCreateOrm (Mapping::create (array_intersect_key (array ('tag_id' => $tag->id, 'article_id' => $obj->id), Mapping::table ()->columns))); });
+
     return redirect_message (array ('admin', 'articles'), array ('_flash_info' => '新增成功！'));
   }
   public function edit ($id = 0) {

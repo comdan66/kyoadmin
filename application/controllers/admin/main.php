@@ -7,11 +7,9 @@
 class Main extends Admin_controller {
 
   public function index () {
-    $dpv = PV::find ('one', array ('select' => 'count', 'conditions' => array ('day = ?', date ('Y-m-d'))));
-    $apv = PV::find ('one', array ('select' => 'SUM(count) as sum', 'conditions' => array ()));
     $this->add_param ('_k', 'main')->load_view (array (
-        'dpv' => $dpv->count,
-        'apv' => $apv->sum,
+        'dpv' => ($dpv = PV::find ('one', array ('select' => 'count', 'conditions' => array ('day = ?', date ('Y-m-d'))))) ? $dpv->count : 0,
+        'apv' => ($apv = PV::find ('one', array ('select' => 'SUM(count) as sum', 'conditions' => array ()))) ? $apv->sum : 0,
       ));
   }
 }

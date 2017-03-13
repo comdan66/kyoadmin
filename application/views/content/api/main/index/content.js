@@ -7,12 +7,9 @@ $(function () {
   var scroll_timer = null;
   var $articles = $('#articles .container');
   
-  function setPictureFeature ($obj) {
-    $obj.find ('._i').imgLiquid ({verticalAlign: 'center'});
-    return $obj.fadeIn ();
-  }
   function loadArticlesFromServer () {
       
+console.error ('x');
     if ($articles.data ('next_id') <= -1) return;
 
     $.ajax ({
@@ -22,19 +19,22 @@ $(function () {
       beforeSend: function () { }
     })
     .done (function (result) {
-      if (!result.status)
-        return;
+      // if (result.status) {
+      //   result.articles.map (function (t) {
+      //     setPictureFeature ($(t).appendTo ($articles).hide ());
+      //   });
+      //   $articles.data ('next_id', result.next_id);
 
-      result.articles.map (function (t) {
-        setPictureFeature ($(t).appendTo ($articles).hide ());
-      });
-      $articles.data ('next_id', result.next_id);
-
-      if (result.next_id < 0) $articles.find ('~ .loading').remove ();
-      else $(window).scroll ();
+      //   if (result.next_id < 0) $articles.find ('~ .loading').remove ();
+      //   else $(window).scroll ();
+      // }
+      console.error (result);
       
     }.bind (this))
-    .fail (function (result) { })
+    .fail (function (result) {
+      
+  console.error (result.responseText);
+    })
     .complete (function (result) { });
   }
   $(window).scroll (function () {

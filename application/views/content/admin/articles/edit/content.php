@@ -49,7 +49,7 @@
 
           <div class='g'>
             <span>文章標籤</span>
-            <textarea name='tags' placeholder='標籤可以逗號 , 分開或者空白鍵分開！'><?php echo isset ($posts['tags']) ? $posts['tags'] : $obj->tags; ?></textarea>
+            <textarea name='tags' placeholder='標籤可以逗號 , 分開或者空白鍵分開！'><?php echo isset ($posts['tags']) ? is_array($posts['tags']) ? implode(',', $posts['tags']) : $posts['tags'] : implode(',', $obj->tags); ?></textarea>
           </div>
         </div>
 

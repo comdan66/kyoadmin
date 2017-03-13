@@ -13,6 +13,8 @@ class Article extends OaModel {
   );
 
   static $has_many = array (
+    array ('mappings', 'class_name' => 'Mapping'),
+    array ('tags', 'class_name' => 'Tag', 'through' => 'mappings'),
   );
 
   static $belongs_to = array (
@@ -32,6 +34,11 @@ class Article extends OaModel {
     OrmImageUploader::bind ('cover', 'ArticleCoverImageUploader');
   }
   public function destroy () {
+    if ($this->mappings)
+      foreach ($this->mappings as $mapping)
+        if (!$mapping->destroy ())
+          return false;
+
     return $this->delete ();
   }
   public function mini_title ($length = 50) {
