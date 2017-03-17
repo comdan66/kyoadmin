@@ -1,4 +1,4 @@
-<form id='form' action='<?php echo base_url ('admin', 'articles');?>' method='post' enctype='multipart/form-data'>
+<form id='form' data-action2='<?php echo base_url ('admin', 'articles', 'prev_add');?>' data-action1='<?php echo base_url ('admin', 'articles');?>' action='<?php echo base_url ('admin', 'articles');?>' method='post' enctype='multipart/form-data'>
   <div id='info'>
     <div>
       <div>
@@ -7,7 +7,7 @@
       <div class='btns'>
         <input type='checkbox' name='is_enabled' id='is_enabled' value='<?php echo isset ($posts['is_enabled']) ? $posts['is_enabled'] : Article::ENABLE_NO;?>' <?php echo (isset ($posts['is_enabled']) ? $posts['is_enabled'] : Article::ENABLE_NO) == Article::ENABLE_YES ? ' checked' : '';?> />
         <a href='<?php echo base_url ('admin', 'articles');?>'>離開</a>
-        <a>預覽</a>
+        <a id='prev'>預覽</a>
         <button type='submit' class='su'>儲存</button>
         <label class='su' for='is_enabled'>發佈</label>
       </div>
@@ -47,7 +47,7 @@
 
           <div class='g'>
             <span>文章標籤</span>
-            <textarea name='tags' placeholder='標籤可以逗號 , 分開或者空白鍵分開！'><?php echo isset ($posts['tags']) ? is_array ($posts['tags']) ? implode(',', $posts['tags']) : '' : '' ?></textarea>
+            <textarea name='tags' placeholder='標籤可以逗號 , 分開或者空白鍵分開！'><?php echo is_array ($tags = isset ($posts['tags']) ? $posts['tags'] : '') ? implode(',', $tags) : $tags; ?></textarea>
           </div>
         </div>
 

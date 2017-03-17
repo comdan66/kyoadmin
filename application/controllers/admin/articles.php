@@ -30,7 +30,36 @@ class Articles extends Admin_controller {
   }
   public function add () {
     $posts = Session::getData ('posts', true);
+
     $this->add_param ('_k', 'article')->load_view (array ('posts' => $posts,));
+  }
+  public function prev_add ($id = 0) {
+    if ($id) $obj = Article::find ('one', array ('conditions' => array ('id = ?', $id)));
+  
+    if (!$this->has_post ())
+      return redirect_message (array ('admin', 'articles', 'add'), array ('_flash_danger' => '非 POST 方法，錯誤的頁面請求。'));
+
+    $posts = OAInput::post ();
+    $posts['content'] = OAInput::post ('content', false);
+    $posts['tags'] = $posts['tags'] ? array_filter (array_map (function ($t) { return trim ($t); }, preg_split ('/[\s,]+/', $posts['tags']))) : array ();
+    $posts['menu'] = Menu::find_by_id ($posts['menu_id']);
+    
+    $cover = OAInput::file ('cover');
+    if ($cover && is_upload_image_format ($cover, 20 * 1024 * 1024, array ('gif', 'jpeg', 'jpg', 'png'))) {
+      $pic = TmpPic::create (array (
+        'name' => ''
+      ));
+      $pic->name->put ($cover);
+      $pic = $pic->name->url ();
+    } else if ($obj) {
+      $pic = $obj->cover->url ();
+    } else {
+      $pic = null;
+    }
+    
+    $this->set_frame_path ('frame', 'site')
+         ->set_content_path ('content', 'admin')
+         ->load_view (array ('posts' => $posts, 'pic' => $pic));
   }
   public function create () {
     if (!$this->has_post ())
@@ -39,7 +68,6 @@ class Articles extends Admin_controller {
     $posts = OAInput::post ();
     $posts['content'] = OAInput::post ('content', false);
     $cover = OAInput::file ('cover');
-
 
     if ($msg = $this->_validation_create ($posts, $cover))
       return redirect_message (array ('admin', 'articles', 'add'), array ('_flash_danger' => $msg, 'posts' => $posts));

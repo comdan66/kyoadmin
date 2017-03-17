@@ -20,4 +20,11 @@ $(function () {
   $('#form').submit (function () {
     $('#is_enabled').val ($('#is_enabled').prop ('checked') ? 1 : 0);
   });
+  $("button[type='submit']").click (function () {
+    $('#form').attr ('action', $('#form').data ('action1')).attr ('target', '_self').submit ();
+  });
+
+  $('#prev').click (function () {
+    $('#form').attr ('action', $('#form').data ('action2')).attr ('target', '_blank').submit ();
+  });
 });

@@ -44,7 +44,12 @@ Route::root ('main');
 
 // $route['admin'] = "admin/main";
 Route::get ('admin', 'admin/main@index');
-Route::get ('/api', 'api/main@index');
+Route::get ('/api/articles', 'api/articles@index');
+Route::get ('/api/search', 'api/search@index');
+Route::get ('/article/(:id)', 'articles@index($1)');
+Route::get ('/article2/(:id)', 'articles@index($1)');
+Route::get ('/search/(:any)', 'search@index($1)');
+Route::get ('/api/pvs', 'api/pvs@index($1)');
 
 Route::get ('/login', 'platform@login');
 Route::get ('/logout', 'platform@logout');

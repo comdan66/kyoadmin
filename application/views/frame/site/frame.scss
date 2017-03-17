@@ -423,6 +423,7 @@ $tablet: 720px;
         text-decoration: none;
         font-weight: bold;
         line-height: 50px;
+        cursor: pointer;
         @include transition(color .3s);
 
         &:hover {
@@ -469,6 +470,7 @@ $tablet: 720px;
           font-size: 16px;
           color: rgba(152, 156, 159, 1.00);
           text-decoration: none;
+          cursor: pointer;
           @include transition(color .3s);
           
           &:hover {

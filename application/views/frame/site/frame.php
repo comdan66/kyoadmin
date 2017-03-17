@@ -11,16 +11,19 @@
 
   </head>
   <body lang="zh-tw">
-    
-    <div id='banner'>
-      <div class='_i'><img src='<?php echo base_url ('resource', 'image', 'site', 'skip.jpg');?>'></div>
-      <form id='banner_search' method='get' action='search.html'>
-        <input type='text' name='q' id='q' value='' onkeyup="this.setAttribute('value', this.value);"/>
-        <button type='submit' class='icon-search'></button>
-        <label class='icon-search' for='q'></label>
-      </form>
-      <a id='banner_down' class='icon-chevron-thin-down'></a>
-    </div>
+<?php
+    if (isset ($banner) && $banner) { ?>
+      <div id='banner'>
+        <div class='_i'><img src='<?php echo $banner->name->url ();?>'></div>
+        <form id='banner_search' method='get' action='<?php echo base_url ('search');?>'>
+          <input type='text' name='keywords' id='q' value='' onkeyup="this.setAttribute('value', this.value);"/>
+          <button type='submit' class='icon-search'></button>
+          <label class='icon-search' for='q'></label>
+        </form>
+        <a id='banner_down' class='icon-chevron-thin-down'></a>
+      </div>
+<?php
+    } ?>
 
     <div id='top_bar'></div>
 
@@ -28,12 +31,12 @@
       <div class='container'>
         <img src="<?php echo base_url ('resource', 'image', 'site', 'TopLogo.png');?>">
         <section>
-          <header><a href='index.html' class='dftm9'><?php echo Info::info ()->site_title;?></a></header>
+          <header><a href='<?php echo base_url ('');?>' class='dftm9'><?php echo Info::info ()->site_title;?></a></header>
           <p><?php echo Info::info ()->site_desc;?></p>
         </section>
         
-        <form id='header_search' method='get' action='search.html'>
-          <input type='text' name='q' id='q2' value='' onkeyup="this.setAttribute('value', this.value);"/>
+        <form id='header_search' method='get' action='<?php echo base_url ('search');?>'>
+          <input type='text' name='keywords' id='q2' value='' onkeyup="this.setAttribute('value', this.value);"/>
           <button type='submit' class='icon-search'></button>
           <label class='icon-search' for='q2'></label>
         </form>
@@ -43,8 +46,8 @@
     <div id='mobile_btn'>
       <div class='container'>
 
-        <form id='mobile_search' method='get' action='search.html'>
-          <input type='text' name='q' id='q3' value='' onkeyup="this.setAttribute('value', this.value);"/>
+        <form id='mobile_search' method='get' action='<?php echo base_url ('search');?>'>
+          <input type='text' name='keywords' id='q3' value='' onkeyup="this.setAttribute('value', this.value);"/>
           <button type='submit' class='icon-search'></button>
           <label class='icon-search' for='q3'></label>
         </form>
@@ -57,12 +60,13 @@
 
 <?php if ($menus = Menu::all (array ('include' => array ('subs'), 'conditions' => array ('menu_id = 0 AND link = ?', '')))) { ?>
   <?php foreach ($menus as $menu) { ?>
-          <div><a<?php echo $menu->link ? " href='" . $menu->link . "'" : '';?>><?php echo $menu->title;?></a>
+          <div>
+            <a href="<?php echo $menu->link ? $menu->link : base_url ('search', $menu->title);?>"><?php echo $menu->title;?></a>
 
       <?php if ($menu->subs) { ?>
               <div>
           <?php foreach ($menu->subs as $sub) { ?>
-                  <a<?php echo $sub->link ? " href='" . $sub->link . "'" : '';?>><?php echo $sub->title;?></a>
+                  <a href="<?php echo $sub->link ? $sub->link : base_url ('search', $sub->title);?>"><?php echo $sub->title;?></a>
           <?php } ?>
               </div>
       <?php } ?>

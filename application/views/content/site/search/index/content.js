@@ -12,11 +12,12 @@ $(function () {
     return $obj.fadeIn ();
   }
   function loadArticlesFromServer () {
+      
     if ($articles.data ('next_id') <= -1) return;
 
     $.ajax ({
       url: $articles.data ('url'),
-      data: { next_id: $articles.data ('next_id') },
+      data: { next_id: $articles.data ('next_id'), keywords: $articles.data ('keywords') },
       async: true, cache: false, dataType: 'json', type: 'get',
       beforeSend: function () { }
     })
@@ -36,7 +37,6 @@ $(function () {
     .fail (function (result) { })
     .complete (function (result) { });
   }
-
   loadArticlesFromServer ();
   $(window).scroll (function () {
 

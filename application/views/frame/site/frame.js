@@ -34,7 +34,7 @@ $(function () {
 
     $('#menu_btn, #cover').click (function () {
       $menu.toggleClass ('show');
-    })
+    });
   }
   
 
@@ -83,4 +83,37 @@ $(function () {
       $tagsA.eq (c + i).addClass ('hide');
     }
   });
+
+   var _s = {};
+  /* get local storage */
+  function _fsg (key) { if (typeof (Storage) !== 'undefined') return (value = localStorage.getItem (key)) && (value = JSON.parse (value)) ? value : undefined; else return (value = _s[key]) && (value = JSON.parse (value)) ? value : undefined; }
+  /* set local storage */
+  function _fss (key, data) { try { if (typeof (Storage) !== 'undefined') localStorage.setItem (key, JSON.stringify (data)); else _s[key] = JSON.stringify (data); return true; } catch (err) { _s[key] = JSON.stringify (data); return true; } }
+  
+  function setPv (today) {
+    $.ajax ({
+      url: '/api/pvs',
+      data: { },
+      async: true, cache: false, dataType: 'json', type: 'get',
+      beforeSend: function () { }
+    })
+    .done (function (result) {
+      _fss ('h', today);
+    }.bind (this))
+    .fail (function (result) { })
+    .complete (function (result) { });
+  }
+
+  var today = new Date ();
+  var dd = today.getDate ();
+  var mm = today.getMonth () + 1; //January is 0!
+  var yyyy = today.getFullYear ();
+
+  if(dd < 10) dd = '0' + dd;
+  if(mm < 10) mm = '0' + mm;
+
+  today = yyyy + '-' + mm + '-' + dd;
+
+  var h = _fsg ('h');
+  if (!(h && h == today)) setPv (today);
 });

@@ -12,7 +12,7 @@
     </div>
     <div>
 <?php foreach ($article->tags as $tag) { ?>
-        <a href='<?php echo base_url ('search', $tag->id);?>'><?php echo $tag->id;?></a>
+        <a href='<?php echo base_url ('search', $tag->name);?>'><?php echo $tag->name;?></a>
 <?php } ?>
     </div>
   </articles>
