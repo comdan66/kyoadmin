@@ -76,8 +76,8 @@
 
 
         <span class='count'>
-          <span>本日人氣：<?php echo ($dpv = PV::find ('one', array ('select' => 'count', 'conditions' => array ('day = ?', date ('Y-m-d'))))) ? $dpv->count : 0;?></span>
-          <span>累積人氣：<?php echo ($apv = PV::find ('one', array ('select' => 'SUM(count) as sum', 'conditions' => array ()))) ? $apv->sum : 0;?></span>
+          <span>本日人氣：<?php echo ($dpv = Pv::find ('one', array ('select' => 'count', 'conditions' => array ('day = ?', date ('Y-m-d'))))) ? $dpv->count : 0;?></span>
+          <span>累積人氣：<?php echo ($apv = Pv::find ('one', array ('select' => 'SUM(count) as sum', 'conditions' => array ()))) ? $apv->sum : 0;?></span>
         </span>
       </div>
     </div>
@@ -105,7 +105,7 @@
 
     <footer id='footer'>
       <div class='container'>
-        <div><span>本日人氣：<?php echo ($dpv = PV::find ('one', array ('select' => 'count', 'conditions' => array ('day = ?', date ('Y-m-d'))))) ? $dpv->count : 0;?></span><span>│</span><span>累積人氣：<?php echo ($apv = PV::find ('one', array ('select' => 'SUM(count) as sum', 'conditions' => array ()))) ? $apv->sum : 0;?></span></div>
+        <div><span>本日人氣：<?php echo ($dpv = Pv::find ('one', array ('select' => 'count', 'conditions' => array ('day = ?', date ('Y-m-d'))))) ? $dpv->count : 0;?></span><span>│</span><span>累積人氣：<?php echo ($apv = Pv::find ('one', array ('select' => 'SUM(count) as sum', 'conditions' => array ()))) ? $apv->sum : 0;?></span></div>
       </div>
     </footer>
 

@@ -8,8 +8,8 @@ class Main extends Admin_controller {
 
   public function index () {
     $this->add_param ('_k', 'main')->load_view (array (
-        'dpv' => ($dpv = PV::find ('one', array ('select' => 'count', 'conditions' => array ('day = ?', date ('Y-m-d'))))) ? $dpv->count : 0,
-        'apv' => ($apv = PV::find ('one', array ('select' => 'SUM(count) as sum', 'conditions' => array ()))) ? $apv->sum : 0,
+        'dpv' => ($dpv = Pv::find ('one', array ('select' => 'count', 'conditions' => array ('day = ?', date ('Y-m-d'))))) ? $dpv->count : 0,
+        'apv' => ($apv = Pv::find ('one', array ('select' => 'SUM(count) as sum', 'conditions' => array ()))) ? $apv->sum : 0,
       ));
   }
 }
