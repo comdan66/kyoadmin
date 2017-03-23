@@ -57,11 +57,13 @@
 
     <div id='menu'>
       <div class='container'>
-
-<?php if ($menus = Menu::all (array ('include' => array ('subs'), 'conditions' => array ('menu_id = 0 AND link = ?', '')))) { ?>
+        <div>
+          <a href="<?php echo base_url ('about');?>">關於 Kyo 桑</a>
+        </div>
+<?php if ($menus = Menu::all (array ('limit' => 7, 'include' => array ('subs'), 'conditions' => array ('menu_id = 0')))) { ?>
   <?php foreach ($menus as $menu) { ?>
           <div>
-            <a href="<?php echo $menu->link ? $menu->link : base_url ('search', $menu->title);?>"><?php echo $menu->title;?></a>
+            <a href="<?php echo $menu->link ? $menu->link : base_url ('search', $menu->title);?>" target='_blank'><?php echo $menu->title;?></a>
 
       <?php if ($menu->subs) { ?>
               <div>
@@ -87,8 +89,8 @@
       <div class='container'>
         <a class='icon-keyboard_arrow_left dis'></a>
         <div>
-    <?php foreach (Tag::all () as $tag) { ?>
-            <a href='<?php echo base_url ('search', $tag->name);?>'><?php echo $tag->name;?></a>
+    <?php foreach (Article::randTags () as $tag) { ?>
+            <a href='<?php echo base_url ('search', $tag);?>'><?php echo $tag;?></a>
     <?php } ?>
         </div>
         <a class='icon-keyboard_arrow_right'></a>

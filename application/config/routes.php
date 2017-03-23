@@ -44,6 +44,7 @@ Route::root ('main');
 
 // $route['admin'] = "admin/main";
 Route::get ('admin', 'admin/main@index');
+Route::get ('about', 'main@about');
 Route::get ('/api/articles', 'api/articles@index');
 Route::get ('/api/search', 'api/search@index');
 Route::get ('/article/(:id)', 'articles@index($1)');

@@ -68,24 +68,12 @@ class Articles extends Admin_controller {
     $posts = OAInput::post ();
     $posts['content'] = OAInput::post ('content', false);
     $cover = OAInput::file ('cover');
-
+    
     if ($msg = $this->_validation_create ($posts, $cover))
       return redirect_message (array ('admin', 'articles', 'add'), array ('_flash_danger' => $msg, 'posts' => $posts));
 
-    if (!Article::transaction (function () use (&$obj, $posts, $cover) { return verifyCreateOrm ($obj = Article::create (array_intersect_key ($posts, Article::table ()->columns))) && $obj->cover->put ($cover); }))
+    if (!Article::transaction (function () use (&$obj, $posts, $cover) { return verifyCreateOrm ($obj = Article::create (array_intersect_key (array_merge ($posts, array ('tags' => implode(',', $posts['tags']))), Article::table ()->columns))) && $obj->cover->put ($cover); }))
       return redirect_message (array ('admin', 'articles', 'add'), array ('_flash_danger' => '新增失敗！', 'posts' => $posts));
-    
-    $posts['tags'] = $posts['tags'] ? array_filter (array_map (function ($t) { return trim ($t); }, preg_split ('/[\s,]+/', $posts['tags']))) : array ();
-
-    $tags = array_map (function ($tag) {
-      return ($a = Tag::find_by_name ($tag)) ? $a : Tag::create (array (
-          'name' => $tag
-        ));
-    }, $posts['tags']);
-
-    if ($tags)
-      foreach ($tags as $tag)
-        Mapping::transaction (function () use ($tag, $obj) { return verifyCreateOrm (Mapping::create (array_intersect_key (array ('tag_id' => $tag->id, 'article_id' => $obj->id), Mapping::table ()->columns))); });
 
     return redirect_message (array ('admin', 'articles'), array ('_flash_info' => '新增成功！'));
   }
@@ -114,7 +102,7 @@ class Articles extends Admin_controller {
     if ($msg = $this->_validation_update ($posts, $cover, $obj))
       return redirect_message (array ('admin', 'articles', $obj->id, 'edit'), array ('_flash_danger' => $msg, 'posts' => $posts));
 
-    if ($columns = array_intersect_key ($posts, $obj->table ()->columns))
+    if ($columns = array_intersect_key (array_merge($posts, array ('tags' => implode(',', $posts['tags']))), $obj->table ()->columns))
       foreach ($columns as $column => $value)
         $obj->$column = $value;
 
@@ -152,7 +140,9 @@ class Articles extends Admin_controller {
     if (!(is_string ($posts['title']) && ($posts['title'] = trim ($posts['title'])))) return '文章標題 格式錯誤！';
     if (!is_upload_image_format ($cover, 20 * 1024 * 1024, array ('gif', 'jpeg', 'jpg', 'png'))) return '文章封面 格式錯誤！';
     if (!(is_string ($posts['content']) && ($posts['content'] = trim ($posts['content'])))) return '文章內容 格式錯誤！';
-
+    $posts['tags'] = isset($posts['tags']) && is_array($posts['tags']) && $posts['tags'] ? array_filter(array_map(function ($t) {
+      return trim($t);
+    }, $posts['tags'])) : array ();
     return '';
   }
   private function _validation_update (&$posts, &$cover, $obj) {
@@ -165,7 +155,9 @@ class Articles extends Admin_controller {
     if (!(is_string ($posts['title']) && ($posts['title'] = trim ($posts['title'])))) return '文章標題 格式錯誤！';
     if ($cover && !is_upload_image_format ($cover, 20 * 1024 * 1024, array ('gif', 'jpeg', 'jpg', 'png'))) return '文章封面 格式錯誤！';
     if (!(is_string ($posts['content']) && ($posts['content'] = trim ($posts['content'])))) return '文章內容 格式錯誤！';
-
+    $posts['tags'] = isset($posts['tags']) && is_array($posts['tags']) && $posts['tags'] ? array_filter(array_map(function ($t) {
+      return trim($t);
+    }, $posts['tags'])) : array ();
     
     return '';
   }

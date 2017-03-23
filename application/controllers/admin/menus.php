@@ -13,7 +13,7 @@ class Menus extends Admin_controller {
     $link = OAInput::post ('link');
 
     if (!$link = trim ($link))
-      return redirect_message (array ('admin', 'menus'), array ('_flash_danger' => '鏈結錯誤'));
+      $link = '';
 
     $menu->link = $link;
     

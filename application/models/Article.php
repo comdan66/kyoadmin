@@ -13,8 +13,6 @@ class Article extends OaModel {
   );
 
   static $has_many = array (
-    array ('mappings', 'class_name' => 'Mapping'),
-    array ('tags', 'class_name' => 'Tag', 'through' => 'mappings'),
   );
 
   static $belongs_to = array (
@@ -28,17 +26,25 @@ class Article extends OaModel {
     self::ENABLE_YES => '啟用',
   );
 
+  private static $tags = null;
+
   public function __construct ($attributes = array (), $guard_attributes = true, $instantiating_via_find = false, $new_record = true) {
     parent::__construct ($attributes, $guard_attributes, $instantiating_via_find, $new_record);
 
     OrmImageUploader::bind ('cover', 'ArticleCoverImageUploader');
   }
+  public static function randTags ($l = 10) {
+    if (!self::$tags)
+      self::$tags = array_2d_to_1d (array_filter (array_map (function ($article) {
+              return $article->tags ();
+            }, Article::all (array ('select' => 'tags')))));
+    
+    return array_splice (self::$tags, 0, $l);
+  }
+  public function tags () {
+    return isset($this->tags) && $this->tags ? preg_split ('/[\s,]+/', $this->tags) : array ();
+  }
   public function destroy () {
-    if ($this->mappings)
-      foreach ($this->mappings as $mapping)
-        if (!$mapping->destroy ())
-          return false;
-
     return $this->delete ();
   }
   public function mini_title ($length = 50) {

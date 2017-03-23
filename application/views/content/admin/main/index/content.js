@@ -56,4 +56,25 @@ $(function () {
     removeButtons: 'Strike,Underline,Italic,Table,HorizontalRule,Smiley,Subscript,Superscript,Forms,Save,NewPage,Print,Preview,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Find,Replace,SelectAll,Scayt,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Form,RemoveFormat,CreateDiv,BidiLtr,BidiRtl,Language,Anchor,Flash,PageBreak,Iframe,About,Styles'
   });
 
+  $('#prev').click (function () {
+    var xxx1 = $('#xxx').val ();
+    var xxx2 = $('.article textarea').val ();
+    $('#xxx1').val (xxx1);
+    $('#xxx2').val (xxx2);
+    $('#www').submit ();
+    // $(this).parents ('form').attr ('action', '/admin/main/prev').attr ('target', '_blank').submit ();
+    // $('<form />').attr ('action', '/admin/main/prev').attr ('target', '_self').append ('body').submit ();
+
+    // $.ajax ({ url: $(this).data ('api'), async: true, cache: false, dataType: 'json', type: 'post', data: {
+    //   column: $(this).data ('column'),
+    //   val: $('.article textarea').val ()
+    // } }).done (function (r) {
+    //   window.open ('/admin/main/prev');
+      
+    //   // $('#form').attr ('action', $('#form').data ('action2')).attr ('target', '_blank').submit ();
+    // }.bind ($(this)))
+    // .complete (function (r) {
+    // });
+
+  });
 });

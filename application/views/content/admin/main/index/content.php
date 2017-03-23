@@ -62,7 +62,7 @@
         <div><b>文章標籤：</b>
           <span><?php echo Info::info ()->tags;?></span><a class='x'>修改</a>
           <form class='s' data-column='tags' data-api='<?php echo base_url ('api/infos/');?>'>
-            <input value='<?php echo Info::info ()->tags;?>' />
+            <input id='xxx' value='<?php echo Info::info ()->tags;?>' placeholder='標籤可以逗號分開或空白鍵分開' />
             <button type='submit'>確定</button><a class='c'>取消</a>
           </form>
         </div>
@@ -71,8 +71,7 @@
           <div class='article'>
             <form data-column='content' data-api='<?php echo base_url ('api/infos/');?>'>
               <textarea><?php echo Info::info ()->content;?></textarea>
-              
-              <div><button type='submit'>確定</button><a>預覽</a></div>
+              <div><button type='submit'>確定</button><a id='prev' data-column='content' data-api='<?php echo base_url ('api/infos/');?>'>預覽</a></div>
             </form>
           </div>
         </div>
@@ -80,3 +79,8 @@
     </div>
   </div>
 </div>
+
+<form id='www' action='/admin/main/prev' method='post' target='_blank'>
+  <input type='text' name='tags' id='xxx1'>
+  <textarea name='content' id='xxx2'></textarea>
+</form>

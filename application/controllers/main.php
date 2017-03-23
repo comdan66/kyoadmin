@@ -7,6 +7,11 @@
 
 class Main extends Site_controller {
 
+  public function about () {
+    
+    $this->load_view (array (
+      ));
+  }
   public function index () {
     $this->load_view (array (
         'banner' => Banner::last ()

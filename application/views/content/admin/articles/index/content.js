@@ -10,7 +10,7 @@ $(function () {
   });
   $('.on').click (function () {
     $.get ($(this).data ('url'), function (r) {
-      $(this).removeClass ('a').addClass (r ? 'a' : null);
+      $(this).removeClass ('a').addClass (r ? 'a' : null).text (r ? '已發佈' : '未發佈');
     }.bind ($(this)));
   })
 });

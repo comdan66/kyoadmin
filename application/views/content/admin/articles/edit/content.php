@@ -48,7 +48,7 @@
 
           <div class='g'>
             <span>文章標籤</span>
-            <textarea name='tags' placeholder='標籤可以逗號 , 分開或者空白鍵分開！'><?php echo is_array ($tags = isset ($posts['tags']) ? $posts['tags'] : column_array ($obj->tags, 'name')) ? implode (',', $tags) : $tags; ?></textarea>
+            <button type='button' id='add_tag' data-val='<?php echo json_encode (isset($posts['tags']) && is_array($posts['tags']) && $posts['tags'] ? $posts['tags'] : $obj->tags ());?>'>+</button>
           </div>
         </div>
 

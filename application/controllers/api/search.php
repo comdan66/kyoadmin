@@ -21,13 +21,14 @@ class Search extends Api_controller {
     //   return $tag_ids;
     // }, $keywords)));
     
-    $tag_ids = column_array (Tag::find ('all', array ('select' => 'id', 'conditions' => array ('name LIKE ?', '%' . $keywords . '%'))), 'id');
-    $article_ids = array_unique (column_array (Mapping::find ('all', array ('select' => 'article_id', 'conditions' => array ('tag_id IN (?)', $tag_ids ? $tag_ids : array (0)))), 'article_id'));
+    // $tag_ids = column_array (Tag::find ('all', array ('select' => 'id', 'conditions' => array ('name LIKE ?', '%' . $keywords . '%'))), 'id');
+    // $article_ids = array_unique (column_array (Mapping::find ('all', array ('select' => 'article_id', 'conditions' => array ('tag_id IN (?)', $tag_ids ? $tag_ids : array (0)))), 'article_id'));
 
     $next_id = OAInput::get ('next_id');
     $limit = ($limit = OAInput::get ('limit')) ? $limit : 5;
 
-    $conditions = $next_id ? array ('id <= ? AND is_enabled = ?' . ($article_ids ? ' AND (id IN (' . implode (',', $article_ids) . ') OR title LIKE ?)' : 'AND title LIKE ?'), $next_id, Article::ENABLE_YES, '%' . $keywords . '%') : array ('is_enabled = ?' . ($article_ids ? ' AND id IN (' . implode (',', $article_ids) . ') OR title LIKE ?' : ' AND title LIKE ?'), Article::ENABLE_YES, '%' . $keywords . '%');
+    $conditions = $next_id ? array ('id <= ? AND is_enabled = ? AND (title LIKE ? OR tags LIKE ?)', $next_id, Article::ENABLE_YES, '%' . $keywords . '%', '%' . $keywords . '%') : array ('is_enabled = ? AND (title LIKE ? OR tags LIKE ?)', Article::ENABLE_YES, '%' . $keywords . '%', '%' . $keywords . '%');
+    
     $articles = Article::find ('all', array ('order' => 'id DESC', 'limit' => $limit + 1, 'conditions' => $conditions));
 
     $next_id = ($temp = (count ($articles) > $limit ? end ($articles) : null)) ? $temp->id : -1;

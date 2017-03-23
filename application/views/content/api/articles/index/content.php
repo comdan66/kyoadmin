@@ -11,8 +11,8 @@
       <p><?php echo $article->mini_content ();?><a href="<?php echo base_url ('article', $article->id);?>">閱讀更多</a></p>
     </div>
     <div>
-<?php foreach ($article->tags as $tag) { ?>
-        <a href='<?php echo base_url ('search', $tag->name);?>'><?php echo $tag->name;?></a>
+<?php foreach ($article->tags () as $tag) { ?>
+        <a href='<?php echo base_url ('search', $tag);?>'><?php echo $tag;?></a>
 <?php } ?>
     </div>
   </articles>

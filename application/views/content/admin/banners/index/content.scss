@@ -73,3 +73,8 @@ form> div {
   margin-top: 20px;
   text-align: left;
 }
+@include range-width(0, 600px) {
+  #info>div>div:last-child, .info>div>div:last-child {
+    display: none;
+  }
+}

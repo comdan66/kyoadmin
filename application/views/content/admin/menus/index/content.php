@@ -2,10 +2,13 @@
   <div>
     <div>
       <h1>設定網站選單</h1>
-      <span>網站選單設置，最多新增八筆選單，次選單不限。</span>
+      <span>網站選單設置，最多新增 <b>7筆</b> 選單，次選單不限。</span>
     </div>
     <div>
-      <a id='add' data-url=<?php echo base_url ('admin', 'menus', 'create_menu');?>>+ 新增主選單</a>
+<?php if (Menu::count (array ('conditions' => array ('menu_id = 0'))) < 7) { ?>
+        <a id='add' data-url=<?php echo base_url ('admin', 'menus', 'create_menu');?>>+ 新增主選單</a>
+<?php }?>
+
     </div>
   </div>
 </div>
@@ -30,7 +33,7 @@
 <?php } ?>
   <div>
 <?php
-    if ($menus = Menu::all (array ('include' => array ('subs'), 'order' => 'id DESC', 'conditions' => array ('menu_id = 0')))) {
+    if ($menus = Menu::all (array ('include' => array ('subs'), 'order' => 'id ASC', 'limit' => 7, 'conditions' => array ('menu_id = 0')))) {
       foreach ($menus as $menu) { ?>
         <div class='tr'>
           <div class='title'>
@@ -43,10 +46,22 @@
             <a data-url='<?php echo base_url ('admin', 'menus', 'create_menu', $menu->id);?>' class='create_sub'>+ 新增子選單</a>
             <a data-url='<?php echo base_url ('admin', 'menus', 'link_menu', $menu->id);?>' class='link_menu'>#</a>
           </div>
-          <div class='items'>
+          <div class='items <?php echo $menu->subs ? '' : 'n';?>'>
       <?php if ($menu->subs) {
               foreach ($menu->subs as $sub) { ?>
-                <div class='item'><span><?php echo $sub->title;?></span><span><a data-url='<?php echo base_url ('admin', 'menus', 'edit_menu', $sub->id);?>' class='edit_menu' data-val='<?php echo $sub->title;?>'>修改</a><a data-url='<?php echo base_url ('admin', 'menus', 'delete_menu', $sub->id);?>' class='delete_menu'>刪除</a></span></div>
+                <div class='item'>
+                  <span>
+                    <b><?php echo $sub->title;?></b>
+              <?php if ($sub->link) {?>
+                      <span>Link: <?php echo $sub->link;?></span>
+              <?php }?>
+                  </span>
+                  <span>
+                    <a data-url='<?php echo base_url ('admin', 'menus', 'edit_menu', $sub->id);?>' class='edit_menu' data-val='<?php echo $sub->title;?>'>修改</a>
+                    <a data-url='<?php echo base_url ('admin', 'menus', 'delete_menu', $sub->id);?>' class='delete_menu'>刪除</a>
+                    <a data-url='<?php echo base_url ('admin', 'menus', 'link_menu', $sub->id);?>' class='link_menu'>#</a>
+                  </span>
+                </div>
         <?php }
             } ?>
           </div>

@@ -15,7 +15,7 @@
       <label class='admin-lock'></label><input type='password' name='password' placeholder='YOUR PASSWORD' autocomplete="off" />
     </div>
     <div class='bottom'>
-      <span>有任何問題歡迎<a href='' target='_blank'>來信</a>告知。</span>
+      <span>有任何問題歡迎<a href='mailto:<?php echo Cfg::setting ('main', 'mail');?>?subject=關於 弓道場 的問題&body=Hi ,%0D%0A%0D%0A 以下是我的一些相關問題..'>來信</a>告知。</span>
       <button type='submit'>Login</button>
     </div>
   </form>

@@ -79,13 +79,20 @@ form> div {
   >span {
     float: left;
     display: inline-block;
-    width: calc(100% - 100px);
+    width: calc(100% - 150px);
 
     &:nth-child(1) {
-      font-weight: bold;
+      > * {
+        width: 100%;
+        display: inline-block;
+        + span {
+          margin-top: 5px;
+          font-size: 13px;
+        }
+      }
     }
     &:nth-child(2) {
-      width: 100px;
+      width: 150px;
       text-align: right;
     }
     a {
@@ -113,6 +120,7 @@ form> div {
   }
 }
 .title {
+  display: inline-block;
   > span {
     display: block;
     margin-bottom: 5px;
@@ -155,4 +163,25 @@ form> div {
   width: 100%;
   margin-top: 20px;
   text-align: left;
+}
+
+@include range-width(0, 600px) {
+  #info>div>div:last-child .su, #info>div>div:last-child a, .info>div>div:last-child .su, .info>div>div:last-child a {
+    float: none;
+  }
+  .table>div .tr>div:first-child {
+    height: auto !important;
+  }
+  .table>div .tr {
+    // border-top: 3px solid #f3f4f5;
+    +.tr{
+      margin-top: 50px;
+    }
+  }
+  .table>div .tr>div:last-child {
+    border-left: 3px solid rgba(204, 205, 206, 1.00);
+  }
+  .items.n {
+      display: none !important;
+  }
 }

@@ -5,3 +5,4 @@
  * @copyright   Copyright (c) 2016 OA Wu Design
  */
 $main['site']['setting'] = 3;
+$main['mail'] = 'comdan66@gmail.com';

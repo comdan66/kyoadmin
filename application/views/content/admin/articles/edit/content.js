@@ -27,4 +27,15 @@ $(function () {
   $('#prev').click (function () {
     $('#form').attr ('action', $('#form').data ('action2')).attr ('target', '_blank').submit ();
   });
+  function adt (v) {
+    $('<div />').addClass ('row').append (
+      $("<input type='text' name='tags[]' placeholder='標籤' value='" + v + "' />")).append (
+      $("<button type='button'>-</button>").click (function () {
+        $(this).parent ().remove ();
+      })).insertBefore ($('#add_tag'));
+  }
+  $('#add_tag').click (function () {
+    adt ('');
+  }).data ('val').map (adt);
+  
 });

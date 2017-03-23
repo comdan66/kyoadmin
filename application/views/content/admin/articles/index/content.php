@@ -60,7 +60,7 @@ if ($_flash_info = Session::getData ('_flash_info', true)) { ?>
               <div>
                 <a href="<?php echo base_url ('admin', 'articles', 'edit', $obj->id);?>">修改</a>
                 <a href="<?php echo base_url ('admin', 'articles', $obj->id);?>" data-method='delete'>刪除</a>
-                <a data-url='<?php echo base_url ('admin', 'articles', 'senable', $obj->id);?>' class='on <?php echo $obj->is_enabled == Article::ENABLE_YES ? ' a' : '';?>'>已發布</a>
+                <a data-url='<?php echo base_url ('admin', 'articles', 'senable', $obj->id);?>' class='on <?php echo $obj->is_enabled == Article::ENABLE_YES ? ' a' : '';?>'><?php echo $obj->is_enabled == Article::ENABLE_YES ? '已發布' : '未發布';?></a>
               </div>
             </div>
             <div>
