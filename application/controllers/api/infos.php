@@ -11,7 +11,9 @@ class Infos extends Admin_controller {
     if (!isset ($posts['column'], $posts['val']))return;
     if ($posts['column'] == 'content')
       $posts['val'] = OAInput::post ('val', true);
-    Info::info ()->$posts['column'] = $posts['val'];
+    
+    $col = $posts['column'];
+    Info::info ()->$col = $posts['val'];
     Info::info ()->save ();
     return $this->output_json ($posts['val']);
   }

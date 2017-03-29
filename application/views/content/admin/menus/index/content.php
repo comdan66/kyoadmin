@@ -2,10 +2,10 @@
   <div>
     <div>
       <h1>設定網站選單</h1>
-      <span>網站選單設置，最多新增 <b>7筆</b> 選單，次選單不限。</span>
+      <span>網站選單設置，最多新增 <b>8筆</b> 選單，次選單不限。</span>
     </div>
     <div>
-<?php if (Menu::count (array ('conditions' => array ('menu_id = 0'))) < 7) { ?>
+<?php if (Menu::count (array ('conditions' => array ('menu_id = 0'))) < 8) { ?>
         <a id='add' data-url=<?php echo base_url ('admin', 'menus', 'create_menu');?>>+ 新增主選單</a>
 <?php }?>
 
