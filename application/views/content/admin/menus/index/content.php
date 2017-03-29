@@ -44,7 +44,7 @@
             <a data-url='<?php echo base_url ('admin', 'menus', 'edit_menu', $menu->id);?>' class='edit_menu' data-val='<?php echo $menu->title;?>'>修改</a>
             <a data-url='<?php echo base_url ('admin', 'menus', 'delete_menu', $menu->id);?>' class='delete_menu'>刪除</a>
             <a data-url='<?php echo base_url ('admin', 'menus', 'create_menu', $menu->id);?>' class='create_sub'>+ 新增子選單</a>
-            <a data-url='<?php echo base_url ('admin', 'menus', 'link_menu', $menu->id);?>' class='link_menu'>#</a>
+            <a data-url='<?php echo base_url ('admin', 'menus', 'link_menu', $menu->id);?>' class='link_menu icon-link'></a>
           </div>
           <div class='items <?php echo $menu->subs ? '' : 'n';?>'>
       <?php if ($menu->subs) {
@@ -59,7 +59,7 @@
                   <span>
                     <a data-url='<?php echo base_url ('admin', 'menus', 'edit_menu', $sub->id);?>' class='edit_menu' data-val='<?php echo $sub->title;?>'>修改</a>
                     <a data-url='<?php echo base_url ('admin', 'menus', 'delete_menu', $sub->id);?>' class='delete_menu'>刪除</a>
-                    <a data-url='<?php echo base_url ('admin', 'menus', 'link_menu', $sub->id);?>' class='link_menu'>#</a>
+                    <a data-url='<?php echo base_url ('admin', 'menus', 'link_menu', $sub->id);?>' class='link_menu icon-link'></a>
                   </span>
                 </div>
         <?php }
