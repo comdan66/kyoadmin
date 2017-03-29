@@ -141,7 +141,7 @@ class Articles extends Admin_controller {
     if (!is_upload_image_format ($cover, 20 * 1024 * 1024, array ('gif', 'jpeg', 'jpg', 'png'))) return '文章封面 格式錯誤！';
     if (!(is_string ($posts['content']) && ($posts['content'] = trim ($posts['content'])))) return '文章內容 格式錯誤！';
     $posts['tags'] = isset($posts['tags']) && is_array($posts['tags']) && $posts['tags'] ? array_filter(array_map(function ($t) {
-      return trim($t);
+      return trim (str_replace ('#', '', $t));
     }, $posts['tags'])) : array ();
     return '';
   }
@@ -156,7 +156,7 @@ class Articles extends Admin_controller {
     if ($cover && !is_upload_image_format ($cover, 20 * 1024 * 1024, array ('gif', 'jpeg', 'jpg', 'png'))) return '文章封面 格式錯誤！';
     if (!(is_string ($posts['content']) && ($posts['content'] = trim ($posts['content'])))) return '文章內容 格式錯誤！';
     $posts['tags'] = isset($posts['tags']) && is_array($posts['tags']) && $posts['tags'] ? array_filter(array_map(function ($t) {
-      return trim($t);
+      return trim (str_replace ('#', '', $t));
     }, $posts['tags'])) : array ();
     
     return '';
