@@ -41,7 +41,7 @@ class Articles extends Admin_controller {
 
     $posts = OAInput::post ();
     $posts['content'] = OAInput::post ('content', false);
-    $posts['tags'] = $posts['tags'] ? array_filter (array_map (function ($t) { return trim ($t); }, preg_split ('/[\s,]+/', $posts['tags']))) : array ();
+    $posts['tags'] = $posts['tags'];
     $posts['menu'] = Menu::find_by_id ($posts['menu_id']);
     
     $cover = OAInput::file ('cover');
