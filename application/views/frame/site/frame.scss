@@ -319,6 +319,18 @@ $tablet: 720px;
   .container {
     @include clearfix();
   }
+  &.fix {
+    @media screen and (min-width: 0) and (max-width: #{$tablet}) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      margin-top: 0;
+      z-index: 99;
+      ~ #nav {
+        margin-top: 55px + 25px + 35px;
+      }
+    }
+  }
   @media screen and (min-width: #{$tablet}) {
     display: none;
   }
@@ -402,6 +414,19 @@ $tablet: 720px;
   background-color: rgba(249, 250, 251, 1.00);
   border-top: 1px solid rgba(247, 248, 249, 1.00);
   border-bottom: 1px solid rgba(247, 248, 249, 1.00);
+
+  &.fix {
+    @media screen and (max-width: #{$tablet}) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      margin-top: 0;
+      z-index: 999;
+      ~ #tags {
+        margin-top: 50px + 8px + 25px;
+      }
+    }
+  }
 
   .container {
     height: 100%;

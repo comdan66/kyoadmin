@@ -3,7 +3,9 @@
   <div class='container'>
     <span>
       <a href="<?php echo base_url ('');?>">首頁</a>
-      <a href="<?php echo base_url ('search', $article->menu->title);?>"><?php echo $article->menu->title;?></a>
+<?php if ($article->menu) { ?>
+        <a href="<?php echo base_url ('search', $article->menu->title);?>"><?php echo $article->menu->title;?></a>
+<?php } ?>
     </span>
     <time><?php echo $article->created_at->format ('Y.m.d');?></time>
   </div>
@@ -30,7 +32,7 @@
     <div id='article_tags'>
       <div class='container'>  
   <?php foreach ($article->tags () as $tag) { ?>
-          <a href='<?php echo base_url ('search/?q=' . $tag);?>'><?php echo $tag;?></a>
+          <a href='<?php echo base_url ('search', $tag);?>'><?php echo $tag;?></a>
   <?php } ?>
       </div>
     </div>

@@ -15,11 +15,28 @@ $(function () {
   $top.click (function () {
     $("html, body").stop ().animate ({ scrollTop: 0 }, 1000);
   })
+  
+  var menu_top = $('#menu').offset ().top;
+  var mobile_btn_top = $('#mobile_btn').offset ().top;
   $(document).scroll (function () {
     var y = $(this).scrollTop ();
     
     if (y > 300) $top.fadeIn ();
     else $top.fadeOut ();
+
+
+    if ($(window).scrollTop () > menu_top) {
+      $('#menu').addClass ('fix');
+    } else {
+      $('#menu').removeClass ('fix');
+    }
+    console.error ($(window).scrollTop (), mobile_btn_top);
+    
+    if ($(window).scrollTop () > mobile_btn_top) {
+      $('#mobile_btn').addClass ('fix');
+    } else {
+      $('#mobile_btn').removeClass ('fix');
+    }
   });
 
   var $menu = $('#menu');
