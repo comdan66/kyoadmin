@@ -26,11 +26,11 @@
 </div>
 
 <?php 
-  if ($article->tags) { ?>
+  if ($article->tags ()) { ?>
     <div id='article_tags'>
       <div class='container'>  
-  <?php foreach ($article->tags as $tag) { ?>
-          <a href='<?php echo $tag->name;?>'><?php echo $tag->name;?></a>
+  <?php foreach ($article->tags () as $tag) { ?>
+          <a href='<?php echo $tag;?>'><?php echo $tag;?></a>
   <?php } ?>
       </div>
     </div>
