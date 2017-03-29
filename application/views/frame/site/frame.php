@@ -63,7 +63,7 @@
 <?php if ($menus = Menu::all (array ('limit' => 8, 'include' => array ('subs'), 'conditions' => array ('menu_id = 0')))) { ?>
   <?php foreach ($menus as $menu) { ?>
           <div>
-            <a href="<?php echo $menu->link ? $menu->link : base_url ('search', $menu->title);?>" target='_blank'><?php echo $menu->title;?></a>
+            <a href="<?php echo $menu->link ? $menu->link : base_url ('search', $menu->title);?>"><?php echo $menu->title;?></a>
 
       <?php if ($menu->subs) { ?>
               <div>
