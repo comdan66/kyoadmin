@@ -30,7 +30,7 @@
     <div id='article_tags'>
       <div class='container'>  
   <?php foreach ($article->tags () as $tag) { ?>
-          <a href='<?php echo $tag;?>'><?php echo $tag;?></a>
+          <a href='<?php echo base_url ('search', $tag);?>'><?php echo $tag;?></a>
   <?php } ?>
       </div>
     </div>
