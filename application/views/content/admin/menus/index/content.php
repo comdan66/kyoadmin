@@ -33,7 +33,7 @@
 <?php } ?>
   <div>
 <?php
-    if ($menus = Menu::all (array ('include' => array ('subs'), 'order' => 'id ASC', 'limit' => 7, 'conditions' => array ('menu_id = 0')))) {
+    if ($menus = Menu::all (array ('include' => array ('subs'), 'order' => 'id ASC', 'limit' => 8, 'conditions' => array ('menu_id = 0')))) {
       foreach ($menus as $menu) { ?>
         <div class='tr'>
           <div class='title'>

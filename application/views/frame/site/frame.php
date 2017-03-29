@@ -60,7 +60,7 @@
         <div>
           <a href="<?php echo base_url ('about');?>">關於 Kyo 桑</a>
         </div>
-<?php if ($menus = Menu::all (array ('limit' => 7, 'include' => array ('subs'), 'conditions' => array ('menu_id = 0')))) { ?>
+<?php if ($menus = Menu::all (array ('limit' => 8, 'include' => array ('subs'), 'conditions' => array ('menu_id = 0')))) { ?>
   <?php foreach ($menus as $menu) { ?>
           <div>
             <a href="<?php echo $menu->link ? $menu->link : base_url ('search', $menu->title);?>" target='_blank'><?php echo $menu->title;?></a>
