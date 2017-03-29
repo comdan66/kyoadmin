@@ -89,7 +89,7 @@
       <div class='container'>
         <a class='icon-keyboard_arrow_left dis'></a>
         <div>
-    <?php foreach (Article::randTags () as $tag) { ?>
+    <?php foreach (array_unique (Article::randTags ()) as $tag) { ?>
             <a href='<?php echo base_url ('search', $tag);?>'><?php echo $tag;?></a>
     <?php } ?>
         </div>
