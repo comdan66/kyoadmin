@@ -2,7 +2,7 @@
   <div>
     <div>
       <h1>設定網站選單</h1>
-      <span>網站選單設置，最多新增 <b>8筆</b> 選單，次選單不限。</span>
+      <span class='tip'>網站選單設置，最多新增 <b>8筆</b> 選單，次選單不限。</span>
     </div>
     <div>
 <?php if (Menu::count (array ('conditions' => array ('menu_id = 0'))) < 8) { ?>

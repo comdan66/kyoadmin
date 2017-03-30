@@ -185,3 +185,11 @@ form> div {
       display: none !important;
   }
 }
+.tip {
+  height: 21px;
+  line-height: 21px;
+  b {
+    display: inline;
+    color: red !important;
+  }
+}
