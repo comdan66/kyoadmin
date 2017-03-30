@@ -29,7 +29,7 @@
 
     <header id='header'>
       <div class='container'>
-        <img src="<?php echo base_url ('resource', 'image', 'site', 'TopLogo.png');?>">
+        <a href="<?php echo base_url ();?>"><img src="<?php echo base_url ('resource', 'image', 'site', 'TopLogo.png');?>"></a>
         <section>
           <header><a href='<?php echo base_url ('');?>' class='dftm9'><?php echo Info::info ()->site_title;?></a></header>
           <p><?php echo Info::info ()->site_desc;?></p>
