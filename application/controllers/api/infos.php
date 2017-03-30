@@ -10,8 +10,7 @@ class Infos extends Admin_controller {
     $posts = OAInput::post ();
     if (!isset ($posts['column'], $posts['val']))return;
     if ($posts['column'] == 'content')
-      $posts['val'] = OAInput::post ('val', true);
-    
+      $posts['val'] = $_POST['val'];
     $col = $posts['column'];
     Info::info ()->$col = $posts['val'];
     Info::info ()->save ();
