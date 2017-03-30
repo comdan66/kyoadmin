@@ -8,7 +8,7 @@
 class Search extends Site_controller {
 
   public function index ($keywords = '') {
-    $keywords = OAInput::get ('q') ? OAInput::get ('q') : ($keywords ? $keywords : '');
+    $keywords = OAInput::get ('keywords') ? OAInput::get ('keywords') : ($keywords ? $keywords : '');
 
     if (!$keywords = trim ($keywords))
       return redirect_message (array (''), array ('_flash_info' => '找不到該關鍵字！'));
