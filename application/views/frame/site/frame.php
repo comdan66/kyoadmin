@@ -68,7 +68,7 @@
       <?php if ($menu->subs) { ?>
               <div>
           <?php foreach ($menu->subs as $sub) { ?>
-                  <a href="<?php echo $sub->link ? $sub->link : base_url ('search', $sub->title);?>"><?php echo $sub->title;?></a>
+                  <a href="<?php echo $sub->link ? $sub->link : base_url ('search', $sub->title);?>" target='<?php echo $sub->link ? '_blank' : '_self';?>'><?php echo $sub->title;?></a>
           <?php } ?>
               </div>
       <?php } ?>
