@@ -21,13 +21,13 @@ class Search extends Api_controller {
     //   return $tag_ids;
     // }, $keywords)));
     
-    // $tag_ids = column_array (Tag::find ('all', array ('select' => 'id', 'conditions' => array ('name LIKE ?', '%' . $keywords . '%'))), 'id');
+    $menu_ids = column_array (Menu::find ('all', array ('select' => 'id', 'conditions' => array ('title LIKE ?', '%' . $keywords . '%'))), 'id');
     // $article_ids = array_unique (column_array (Mapping::find ('all', array ('select' => 'article_id', 'conditions' => array ('tag_id IN (?)', $tag_ids ? $tag_ids : array (0)))), 'article_id'));
 
     $next_id = OAInput::get ('next_id');
     $limit = ($limit = OAInput::get ('limit')) ? $limit : 5;
 
-    $conditions = $next_id ? array ('id <= ? AND is_enabled = ? AND (title LIKE ? OR tags LIKE ?)', $next_id, Article::ENABLE_YES, '%' . $keywords . '%', '%' . $keywords . '%') : array ('is_enabled = ? AND (title LIKE ? OR tags LIKE ?)', Article::ENABLE_YES, '%' . $keywords . '%', '%' . $keywords . '%');
+    $conditions = $next_id ? array ('id <= ? AND is_enabled = ? AND (title LIKE ? OR tags LIKE ? OR menu_id IN (?))', $next_id, Article::ENABLE_YES, '%' . $keywords . '%', '%' . $keywords . '%') : array ('is_enabled = ? AND (title LIKE ? OR tags LIKE ?)', Article::ENABLE_YES, '%' . $keywords . '%', '%' . $keywords . '%', $menu_ids ? $menu_ids : array (0));
     
     $articles = Article::find ('all', array ('order' => 'id DESC', 'limit' => $limit + 1, 'conditions' => $conditions));
 
