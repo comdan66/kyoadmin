@@ -129,6 +129,7 @@ form> div {
   >div {
     display: block;
     margin-bottom: 10px;
+    @include overflow-docx3();
   }
   > a {
     display: inline-block;

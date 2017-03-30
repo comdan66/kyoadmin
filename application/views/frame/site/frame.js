@@ -30,7 +30,6 @@ $(function () {
     } else {
       $('#menu').removeClass ('fix');
     }
-    console.error ($(window).scrollTop (), mobile_btn_top);
     
     if ($(window).scrollTop () > mobile_btn_top) {
       $('#mobile_btn').addClass ('fix');

@@ -416,7 +416,7 @@ $tablet: 720px;
   border-bottom: 1px solid rgba(247, 248, 249, 1.00);
 
   &.fix {
-    @media screen and (max-width: #{$tablet}) {
+    @media screen and (min-width: #{$tablet}) {
       position: fixed;
       top: 0;
       left: 0;
