@@ -253,7 +253,7 @@ $tablet: 720px;
   margin-top: 25px;
   @include clearfix();
   
-  >a:first-child {
+  .container>a:first-child {
     display: inline-block;
     float: left;
     width: 50px;
