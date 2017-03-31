@@ -22,7 +22,7 @@ $(function () {
   });
   $('.link_menu').click (function () {
     var link = prompt ('請輸入鏈結', $(this).data ('val'));
-    if (link === false) return false;
+    if (link === null) return false;
     $('#edit_main_link').val (link);
     $('#link_main_menu').attr ('action', $(this).data ('url')).submit ();
   });
