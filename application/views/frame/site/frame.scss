@@ -668,7 +668,7 @@ $tablet: 720px;
   margin-top: 8px;
   z-index: 1;
   padding-top: 5px;
-  @media screen and (min-width: 0) and (max-width: #{$tablet}) {
+  @media screen and (min-width: 0) and (max-width: #{768px}) {
     display: none;
   }
   @for $i from 1 through 10 {

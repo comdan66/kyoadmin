@@ -37,7 +37,7 @@ class Article extends OaModel {
     if (!self::$tags)
       self::$tags = array_2d_to_1d (array_filter (array_map (function ($article) {
               return $article->tags ();
-            }, Article::all (array ('select' => 'tags')))));
+            }, Article::all (array ('select' => 'tags', 'order' => 'id DESC')))));
     
     return array_splice (self::$tags, 0, $l);
   }
