@@ -13,7 +13,7 @@ $(function () {
   });
   var $top = $('#top');
   $top.click (function () {
-    $("html, body").stop ().animate ({ scrollTop: $(window).height () }, 1000);
+    $("html, body").stop ().animate ({ scrollTop: 0 }, 1000);
   })
   
   var menu_top = $('#menu').offset ().top;
@@ -24,6 +24,8 @@ $(function () {
     if (y > 300) $top.fadeIn ();
     else $top.fadeOut ();
 
+    if ($('#banner').length > 0 && $(window).scrollTop () > $(window).height ())
+      $('#banner').remove ();
 
     if ($(window).scrollTop () > menu_top) {
       $('#menu').addClass ('fix');
