@@ -13,7 +13,7 @@ $(function () {
   });
   var $top = $('#top');
   $top.click (function () {
-    $("html, body").stop ().animate ({ scrollTop: 0 }, 1000);
+    $("html, body").stop ().animate ({ scrollTop: $(window).height () }, 1000);
   })
   
   var menu_top = $('#menu').offset ().top;

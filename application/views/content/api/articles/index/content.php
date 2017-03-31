@@ -6,7 +6,7 @@
       </a>
     </figure>
     <div>
-      <time>2016.09.25</time>
+      <time><?php echo $article->created_at->format ('Y.m.d');?></time>
       <header><a href='<?php echo base_url ('article', $article->id);?>' class='dftm9'><?php echo $article->title;?></a></header>
       <p><?php echo $article->mini_content ();?><a href="<?php echo base_url ('article', $article->id);?>">閱讀更多</a></p>
     </div>
