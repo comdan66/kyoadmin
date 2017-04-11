@@ -26,6 +26,32 @@ class OrmImageUploader extends OrmUploader {
   protected function getVirtualVersions () {
     return array ();
   }
+  
+  // return boolean
+  public function add_logo ($logo, $p = 'tl', $s = 10) {
+    if (!$logo) return true;
+    $name = pathinfo($logo->name->url (), PATHINFO_BASENAME);
+    if (!download_web_file ($logo->name->url (), $path_logo = FCPATH . implode (DIRECTORY_SEPARATOR, $fileName = array_merge ($this->getTempDirectory (), array ($name)))))
+      return false;
+
+    $name = pathinfo($this->url (), PATHINFO_BASENAME);
+    if (!download_web_file ($this->url (), $path_self = FCPATH . implode (DIRECTORY_SEPARATOR, $fileName = array_merge ($this->getTempDirectory (), array ($name))))) {
+      @unlink ($path_logo);
+      return false;
+    }
+
+    if (!ImageUtility::addLogo ($path_self, $path_logo, $path_save = FCPATH . implode (DIRECTORY_SEPARATOR, $fileName = array_merge ($this->getTempDirectory (), array ('t' . $name))), $s, $p)) {
+      @unlink ($path_logo);
+      @unlink ($path_self);
+      return false;
+    }
+    $r = $this->put ($path_save);
+    @unlink ($path_self);
+    @unlink ($path_logo);
+    @unlink ($path_save);
+    
+    return $r;
+  }
   // return array
   protected function getVersions () {
     return $this->configs['default_version'];

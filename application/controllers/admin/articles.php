@@ -51,6 +51,10 @@ class Articles extends Admin_controller {
         'name' => ''
       ));
       $pic->name->put ($cover);
+    
+      if (($logo = Logo::last ()) && $logo->is_cover == Logo::COVER_YES)
+        $pic->name->add_logo ($logo);
+
       $pic = $pic->name->url ();
     } else if ($obj) {
       $pic = $obj->cover->url ();
@@ -73,7 +77,18 @@ class Articles extends Admin_controller {
     if ($msg = $this->_validation_create ($posts, $cover))
       return redirect_message (array ('admin', 'articles', 'add'), array ('_flash_danger' => $msg, 'posts' => $posts));
 
-    if (!Article::transaction (function () use (&$obj, $posts, $cover) { return verifyCreateOrm ($obj = Article::create (array_intersect_key (array_merge ($posts, array ('tags' => implode(',', $posts['tags']))), Article::table ()->columns))) && $obj->cover->put ($cover); }))
+    if (!Article::transaction (function () use (&$obj, $posts, $cover) {
+      if (!verifyCreateOrm ($obj = Article::create (array_intersect_key (array_merge ($posts, array ('tags' => implode(',', $posts['tags']))), Article::table ()->columns))))
+        return false;
+
+      if (!$obj->cover->put ($cover))
+        return false;
+      
+      if (!(($logo = Logo::last ()) && $logo->is_cover == Logo::COVER_YES))
+        return true;
+
+       return $obj->cover->add_logo ($logo);
+    }))
       return redirect_message (array ('admin', 'articles', 'add'), array ('_flash_danger' => '新增失敗！', 'posts' => $posts));
 
     return redirect_message (array ('admin', 'articles'), array ('_flash_info' => '新增成功！'));
@@ -107,7 +122,16 @@ class Articles extends Admin_controller {
       foreach ($columns as $column => $value)
         $obj->$column = $value;
 
-    if (!Article::transaction (function () use ($obj, $posts, $cover) { if (!$obj->save () || ($cover && !$obj->cover->put ($cover))) return false; return true; }))
+    if (!Article::transaction (function () use ($obj, $posts, $cover) {
+      if (!$cover) return $obj->save ();
+
+      if (!$obj->cover->put ($cover)) return false;
+
+      if (!(($logo = Logo::last ()) && $logo->is_cover == Logo::COVER_YES))
+        return true;
+
+       return $obj->cover->add_logo ($logo);
+    }))
       return redirect_message (array ('admin', 'articles', $obj->id, 'edit'), array ('_flash_danger' => '更新失敗！', 'posts' => $posts));
 
     return redirect_message (array ('admin', 'articles'), array ('_flash_info' => '更新成功！'));

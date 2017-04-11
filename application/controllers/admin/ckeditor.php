@@ -46,7 +46,15 @@ class Ckeditor extends Admin_controller {
     $funcNum = $_GET['CKEditorFuncNum'];
     $upload = OAInput::file ('upload');
 
-    if (!($upload && verifyCreateOrm ($img = CkeditorImage::create (array ('name' => ''))) && $img->name->put ($upload, true))) echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction ($funcNum, '', '上傳失敗！');</script>";
-    else echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction ($funcNum, '" . $img->name->url ('400h') . "', '上傳成功！');</script>";
+    if (!($upload && verifyCreateOrm ($img = CkeditorImage::create (array ('name' => ''))) && $img->name->put ($upload, true)))
+      echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction ($funcNum, '', '上傳失敗！');</script>";
+    else
+      if ($logo = Logo::last ())
+       if ($logo->is_article == Logo::ACTIVE_YES && $img->name->add_logo ($logo))
+          echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction ($funcNum, '" . $img->name->url ('400h') . "', '上傳成功！');</script>";
+        else 
+          echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction ($funcNum, '', '上傳失敗！');</script>";
+      else
+        echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction ($funcNum, '" . $img->name->url ('400h') . "', '上傳成功！');</script>";
   }
 }

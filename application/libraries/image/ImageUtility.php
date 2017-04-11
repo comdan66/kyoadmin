@@ -108,4 +108,10 @@ class ImageUtility {
 
     return call_user_func_array (array ($class, 'photos'), array ($files, $save));
   }
+  public static function addLogo ($self, $logo, $save, $s = 10, $p = '', $class = 'ImageImagickUtility') {
+    if (!class_exists ($class))
+      include_once $class . '.php';
+
+    return call_user_func_array (array ($class, 'addLogo'), array ($self, $logo, $save, $s, $p));
+  }
 }

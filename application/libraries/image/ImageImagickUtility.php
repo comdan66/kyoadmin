@@ -689,4 +689,50 @@ class ImageImagickUtility extends ImageBaseUtility {
 
     return $newImage->writeImages ($save, $rawData);
   }
+
+  public static function getDimension2 ($image = null) {
+    if (!(($imagePage = $image->getImagePage ()) && isset ($imagePage['width']) && isset ($imagePage['height']) && (intval ($imagePage['width']) > 0) && (intval ($imagePage['height']) > 0)))
+      $imagePage = $image->getImageGeometry ();
+
+    if (isset ($imagePage['width']) && isset ($imagePage['height']) && (intval ($imagePage['width']) > 0) && (intval ($imagePage['height']) > 0))
+      return ImageUtility::createDimension ($imagePage['width'], $imagePage['height']);
+    else
+      throw new ImageUtilityException ('ImageImagickUtility 錯誤！', '取得尺寸失敗！', '請程式設計者確認狀況！');
+  }
+  public static function addLogo ($path_self, $path_logo, $save = null, $s = 10, $p = '', $rawData = true) {
+    if ($p == '') $p = 'tl';
+
+    if (!$save)
+      throw new ImageUtilityException ('ImageImagickUtility 錯誤！', '錯誤的儲存路徑，save' . $save, '請再次確認儲存路徑！');
+    
+    $image_logo = new Imagick ($path_logo);
+    $dimension_logo = self::getDimension2 ($image_logo);
+
+    $image_self = new Imagick ($path_self);
+    $dimension_self = self::getDimension2 ($image_self);
+    $image_self->setFormat (pathinfo ($save, PATHINFO_EXTENSION));
+
+    if ($dimension_self['width'] < $dimension_logo['width'] && $dimension_self['height'] < $dimension_logo['height'])
+      return false;
+
+    $top = $s;
+    $left = $s;
+    if ($p == 'tr' || $p == 'br') {
+      $left = $dimension_self['width'] - $dimension_logo['width'] - $s;
+    }
+    if ($p == 'bl' || $p == 'br') {
+      $top = $dimension_self['height'] - $dimension_logo['height'] - $s;
+    }
+    if ($p == 'c') {
+      $left = ($dimension_self['width'] - $dimension_logo['width']) / 2;
+      $top = ($dimension_self['height'] - $dimension_logo['height']) / 2;
+    }
+
+    $image_self->compositeImage (ImageUtility::create ($path_logo, 'imgk')->adaptiveResizeQuadrant ($dimension_logo['width'], $dimension_logo['height'])
+                                                                ->getImage (),
+                               imagick::COMPOSITE_DEFAULT,
+                               $left,
+                               $top);
+    return $image_self->writeImages ($save, $rawData);
+  }
 }

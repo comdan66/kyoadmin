@@ -56,7 +56,7 @@ if ($_flash_info = Session::getData ('_flash_info', true)) { ?>
     </div>
     <div>
 <?php if ($logo) { ?>
-        <img src='<?php echo $logo->name->url ('120w');?>'>
+        <span class='img'><img src='<?php echo $logo->name->url ('120w');?>'></span>
 <?php }?>
       <div>
         <input type='file' name='name'>
