@@ -12,5 +12,12 @@ $(function () {
     $.get ($(this).data ('url'), function (r) {
       $(this).removeClass ('a').addClass (r ? 'a' : null).text (r ? '已發佈' : '未發佈');
     }.bind ($(this)));
-  })
+  });
+  $('.switch input').change (function () {
+    console.error ('x');
+    
+    var $form = $(this).parents ('form');
+    $form.attr ('action', $form.attr ('action') + '/' + $(this).data ('id'));
+    $form.append ("<input type='hidden' name='_method' value='put' />").submit ();
+  });
 });

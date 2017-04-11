@@ -24,6 +24,7 @@ class Articles extends Admin_controller {
 
     return $this->add_param ('_k', 'article')->load_view (array (
         'objs' => $objs,
+        'logo' => Logo::last (),
         'columns' => $columns,
         'pagination' => $this->_get_pagination ($limit, $total, $configs),
       ));

@@ -59,6 +59,7 @@ Route::get ('/platform', 'platform@login');
 
 Route::group ('admin', function () {
   Route::resourcePagination (array ('articles'), 'articles');
+  Route::resourcePagination (array ('logos'), 'logos');
 });
 // Route::group ('api', function () {
 //   Route::resourcePagination (array ('articles'), 'articles');

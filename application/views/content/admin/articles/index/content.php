@@ -49,6 +49,40 @@ if ($_flash_info = Session::getData ('_flash_info', true)) { ?>
   </div>
 </div>
 
+<form class='logo' action='<?php echo base_url ('admin/logos');?>' method='post' enctype='multipart/form-data'>
+  <div>
+    <div>
+      <h2>浮水印設定</h2>
+    </div>
+    <div>
+<?php if ($logo) { ?>
+        <img src='<?php echo $logo->name->url ('120w');?>'>
+<?php }?>
+      <div>
+        <input type='file' name='name'>
+        
+        <div>
+          <span>封面</span>
+          <label class='switch'>
+            <input type='checkbox' name='is_cover' data-id='<?php echo $logo ? $logo->id : 0;?>'<?php echo ($logo ? $logo->is_cover : Logo::COVER_NO) == Logo::COVER_YES ? ' checked' : '';?> />
+            <span></span>
+          </label>
+        </div>
+
+        <div>
+          <span>內文</span>
+          <label class='switch'>
+            <input type='checkbox' name='is_article' data-id='<?php echo $logo ? $logo->id : 0;?>'<?php echo ($logo ? $logo->is_article : Logo::ACTIVE_NO) == Logo::ACTIVE_YES ? ' checked' : '';?> />
+            <span></span>
+          </label>
+        </div>
+
+      </div>
+      <button type='submit'>確定</button>
+    </div>
+  </div>
+</form>
+
 <div class='table'>
   <div>
 <?php if ($objs) {
