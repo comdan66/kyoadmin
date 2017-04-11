@@ -14,8 +14,11 @@ $(function () {
     }.bind ($(this)));
   });
   $('.switch input').change (function () {
-    console.error ('x');
-    
+    var $form = $(this).parents ('form');
+    $form.attr ('action', $form.attr ('action') + '/' + $(this).data ('id'));
+    $form.append ("<input type='hidden' name='_method' value='put' />").submit ();
+  });
+  $('.radios input').click (function () {
     var $form = $(this).parents ('form');
     $form.attr ('action', $form.attr ('action') + '/' + $(this).data ('id'));
     $form.append ("<input type='hidden' name='_method' value='put' />").submit ();

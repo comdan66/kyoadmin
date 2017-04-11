@@ -77,6 +77,16 @@ if ($_flash_info = Session::getData ('_flash_info', true)) { ?>
           </label>
         </div>
 
+        <div>
+          <div class='radios'>
+            <label><input type='radio' name='position'  data-id='<?php echo $logo ? $logo->id : 0;?>' value='tl'<?php echo $logo && $logo->position == 'tl' ? ' checked' : ' checked';?> /><span></span>左上</label>
+            <label><input type='radio' name='position'  data-id='<?php echo $logo ? $logo->id : 0;?>' value='tr'<?php echo $logo && $logo->position == 'tr' ? ' checked' : '';?> /><span></span>右上</label>
+            <label><input type='radio' name='position'  data-id='<?php echo $logo ? $logo->id : 0;?>' value='bl'<?php echo $logo && $logo->position == 'bl' ? ' checked' : '';?> /><span></span>左下</label>
+            <label><input type='radio' name='position'  data-id='<?php echo $logo ? $logo->id : 0;?>' value='br'<?php echo $logo && $logo->position == 'br' ? ' checked' : '';?> /><span></span>右下</label>
+            <label><input type='radio' name='position'  data-id='<?php echo $logo ? $logo->id : 0;?>' value='c'<?php echo $logo && $logo->position ==  'c'  ? ' checked' : '';?> /><span></span>中間</label>
+          </div>
+        </div>
+
       </div>
       <button type='submit'>確定</button>
     </div>

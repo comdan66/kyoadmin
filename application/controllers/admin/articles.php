@@ -53,7 +53,7 @@ class Articles extends Admin_controller {
       $pic->name->put ($cover);
     
       if (($logo = Logo::last ()) && $logo->is_cover == Logo::COVER_YES)
-        $pic->name->add_logo ($logo);
+        $pic->name->add_logo ($logo, $logo->position);
 
       $pic = $pic->name->url ();
     } else if ($obj) {
@@ -87,7 +87,7 @@ class Articles extends Admin_controller {
       if (!(($logo = Logo::last ()) && $logo->is_cover == Logo::COVER_YES))
         return true;
 
-       return $obj->cover->add_logo ($logo);
+       return $obj->cover->add_logo ($logo, $logo->position);
     }))
       return redirect_message (array ('admin', 'articles', 'add'), array ('_flash_danger' => '新增失敗！', 'posts' => $posts));
 
@@ -130,7 +130,7 @@ class Articles extends Admin_controller {
       if (!(($logo = Logo::last ()) && $logo->is_cover == Logo::COVER_YES))
         return true;
 
-       return $obj->cover->add_logo ($logo);
+       return $obj->cover->add_logo ($logo, $logo->position);
     }))
       return redirect_message (array ('admin', 'articles', $obj->id, 'edit'), array ('_flash_danger' => '更新失敗！', 'posts' => $posts));
 

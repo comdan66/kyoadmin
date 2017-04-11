@@ -7,6 +7,12 @@
 
 class Main extends Site_controller {
 
+  // public function cli () {
+  //   $a = Article::first ();
+
+  //   echo $a->cover->add_logo (Logo::last ());
+  //   // echo img ($a->cover->url ());
+  // }
   public function about () {
     return $this->load_view (array ());
   }

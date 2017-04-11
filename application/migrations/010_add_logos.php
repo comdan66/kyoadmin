@@ -11,6 +11,7 @@ class Migration_Add_logos extends CI_Migration {
       "CREATE TABLE `logos` (
         `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
         `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '檔案名稱',
+        `position` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'tl' COMMENT '位置',
 
         `is_cover` tinyint(4) unsigned NOT NULL DEFAULT 0 COMMENT '封面',
         `is_article` tinyint(4) unsigned NOT NULL DEFAULT 0 COMMENT '內文',
