@@ -33,7 +33,7 @@
 
     <footer id='footer'>
       <div>
-        如有任何問題歡迎 <a href='' target='_blank'>來信</a> 告知
+        如有任何問題歡迎 <a href='' target='_blank'>來信</a> 告知告知 / If there has any question, please <a href='mailto:<?php echo Cfg::setting ('main', 'mail');?>'>e-mail</a> right away.
       </div>
     </footer>
 

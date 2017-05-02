@@ -378,6 +378,10 @@ html {
     padding: 25px 0;
     color: rgba(185, 186, 187, 1.00);
       font-size: 13px;
+    @include range-width(0, 600px) {
+      text-align: left;
+
+    }
     a {
       display: inline-block;
       color: rgba(131, 195, 225, 1.00);
